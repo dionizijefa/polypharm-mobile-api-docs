@@ -5,7 +5,7 @@ language_tabs: # must be one of https://github.com/rouge-ruby/rouge/wiki/List-of
   - python
 
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
+#  - <a href='#'>Sign Up for a Developer Key</a>
   - <a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a>
 
 includes:
@@ -290,7 +290,7 @@ response = requests.get('http://127.0.0.1:8000/user/conditions', headers=header,
 
 `GET http://mobile-api.polypharm.solutions/user/me`
 
-## Request Body
+### Request Body
 
 >Example body
 
@@ -317,22 +317,35 @@ Code | Meaning
 403| Error -- Invalid access token
 
 ## Add Therapy
-Adds a medication to therapy model.
+
+>Example code
+
+```python
+headers = {'Authorization': "kg94385kgdsfj"}
+therapy = {
+    "drugId": 1691,
+    "productId": 2554,
+    "dose": 800,
+    "unit": 'mg',
+    "quantity": 3,
+    "frequency": 'daily',
+    "duration": 10,
+    "treats": 'Headache',
+    "startDate": str(datetime.now()),
+    "endDate": str(datetime.now()),
+    "timeOfDay": str(time(14, 30)),
+}
+requests.post('http://127.0.0.1:8000/user/add_therapy', json=therapy, headers=headers).json()
+```
+
+Adds a medication to users therapy history.
 <aside class="notice">
 Requires an authorization header.
 </aside>
 
 ### HTTP Request
 
->Example code
-
-```python
-headers = {'Authorization': "kg94385kgdsfj"}
-body = {'conditions': ['Headache', 'Stomach pain']}
-response = requests.get('http://127.0.0.1:8000/user/conditions', headers=header, body=body)
-```
-
-`GET http://mobile-api.polypharm.solutions/user/me`
+`POST http://mobile-api.polypharm.solutions/user/add_therapy`
 
 ## Request Body
 
@@ -340,25 +353,65 @@ response = requests.get('http://127.0.0.1:8000/user/conditions', headers=header,
 
 ````json
 {
-  "conditions": ["Headache", "Stomach Pain"]
-}
+    "drugId": 1691,
+    "productId": 2554,
+    "dose": 800,
+    "unit": "mg",
+    "quantity": 3,
+    "frequency": "daily",
+    "duration": 10,
+    "treats": "Headache",
+    "startDate": "2023-04-16 23:41:11.683103",
+    "endDate": "2023-04-16 23:41:11.683103",
+    "timeOfDay": "14:30:00"
+}   
 ````
 
-
 {
-  "conditions": ["Headache", "Stomach pain"]
+    "drugId": int,
+    "productId": int,
+    "dose": float,
+    "unit": string,
+    "quantity": float,
+    "frequency": string,
+    "duration": int,
+    "treats": string,
+    "startDate": DateTime string,
+    "endDate": DateTime string,
+    "timeOfDay": Time string
 }
 
-fields | type                     | description
------- |--------------------------| -----------
-"conditions" | [string, string, string] | List of strings
+fields | type            | description
+------ |-----------------| -----------
+"drugId" | int             | Ingredient ID
+"productId" | int             | Product ID
+"dose" | float           | How strong is the medicine, e.g. 30mg
+"unit" | string          | How is it measured
+"quantity" | int             | How many to take each time
+"frequency" | string          | How often to take
+"duration" | int             | How many days is the therapy
+"treats" | string          | What is it for
+"startDate" | DateTime string | /
+"endDate" | DateTime string | /
+"timeOfDay" | Time string     | When to take
 
 ### Response
 Code | Meaning
 ---------- | -------
-200| Success -- Conditions updated successfully
-400| Error -- Conditions field is required
+200| Success -- Therapy added successfully
 403| Error -- Invalid access token
+
+## Get Active Therapies
+Get all active therapies
+<aside class="notice">
+Requires an authorization header.
+</aside>
+
+## Finish Therapy
+Finishes a therapy as completed or discontinued or something like that.
+<aside class="notice">
+Requires an authorization header.
+</aside>
 
 ## Add Appointment
 Adds an appointment to appointment model.
@@ -366,8 +419,8 @@ Adds an appointment to appointment model.
 Requires an authorization header.
 </aside>
 
-## Finish Therapy
-Finishes a therapy as completed or discontinued or something like that.
+## Get Active Appointments
+Get all active appointments.
 <aside class="notice">
 Requires an authorization header.
 </aside>
@@ -380,6 +433,8 @@ Requires an authorization header.
 
 # Polypharm
 Functionalities that are related to personalized medicine selection and/or evaluation.
+
+## Get Conditions
 
 ## Find drug
 Searches a user input string to find a product or an active ingredient
@@ -490,10 +545,10 @@ Returns an ingredient model from an ingredient ID
 >Example code
 
 ```python
-response = requests.get('http://127.0.0.1:8000/polypharm/ingredient/<id>')
+response = requests.get('http://127.0.0.1:8000/polypharm/ingredient/1691')
 ```
 
-`GET http://mobile-api.polypharm.solutions/polypharm/ingredient/1691`
+`GET http://mobile-api.polypharm.solutions/polypharm/ingredient/<id>`
 
 ### Route parameter
 
@@ -577,10 +632,10 @@ Returns a product model from a product ID
 >Example code
 
 ```python
-response = requests.get('http://127.0.0.1:8000/polypharm/product/<id>')
+response = requests.get('http://127.0.0.1:8000/polypharm/product/2554')
 ```
 
-`GET http://mobile-api.polypharm.solutions/polypharm/product/2554`
+`GET http://mobile-api.polypharm.solutions/polypharm/product/<id>`
 
 ### Route parameter
 
