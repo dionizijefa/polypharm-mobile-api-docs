@@ -466,12 +466,12 @@ name | string  | /
 
 ### product
 
-fields | type            | description
------- |-----------------| -----------
-brand_name | string          |
-dose | string          | How strong it is, e.g. 30 mg                                   
-id | integer         | Primary key of the product
-unit | integer         | How is it measured, e.g. in mg
+fields | type    | description
+------ |---------| -----------
+brand_name | string  |
+dose | float   | How strong it is, e.g. 30 mg                                   
+id | integer | Primary key of the product
+unit | string  | How is it measured, e.g. in mg
 
 
 ### Response
@@ -485,8 +485,163 @@ Code | Meaning
 ## Get ingredient
 Returns an ingredient model from an ingredient ID
 
+### HTTP Request
+
+>Example code
+
+```python
+response = requests.get('http://127.0.0.1:8000/polypharm/ingredient/<id>')
+```
+
+`GET http://mobile-api.polypharm.solutions/polypharm/ingredient/1691`
+
+### Route parameter
+
+parameter | type | description        
+------ |------| -------------------|
+id | int  | ID of the ingredient
+
+### Returns
+
+> GET returns response body
+
+````json
+{
+  "cyp1a2Inhibition": 0.06,
+  "cyp2c19Inhibition": 0.05,
+  "cyp2c9Inhibition": 0.2,
+  "cyp2d6Inhibition": 0.0,
+  "cyp3a4Inhibition": 0.0,
+  "drugbankId": "DB01050",
+  "id": 1691,
+  "ingredient": "ibuprofen",
+  "name": "ibuprofen",
+  "prevents": ["Pain"],
+  "treats": [
+    "Arthritis, Juvenile",
+    "Arthritis, Rheumatoid",
+    "Bursitis",
+    "Dysmenorrhea",
+    "Fever",
+    "Gout",
+    "Inflammation",
+    "Menorrhagia",
+    "Osteoarthritis",
+    "Pain, Postoperative",
+    "Premenstrual Syndrome",
+    "Spondylitis, Ankylosing"
+  ]
+}
+````
+
+{
+  "cyp1a2Inhibition": float,
+  "cyp2c19Inhibition": float,
+  "cyp2c9Inhibition": float,
+  "cyp2d6Inhibition": float,
+  "cyp3a4Inhibition": float,
+  "drugbankId": string,
+  "id": int,
+  "ingredient": string,
+  "name": string,
+  "prevents": [string],
+  "treats": [string]
+}
+
+fields | type             | description
+------ |------------------| -----------
+"cyp1a2Inhibition" | float            | Inhibition of the CYP1A2 enzyme
+"cyp2c19Inhibition" | float            | /
+"cyp2c9Inhibition" | float            | /
+"cyp2d6Inhibition" | float            | /
+"cyp3a4Inhibition" | float            | /
+"drugbankId" | string           | ID in the Drugbank database
+"id" | string           | Primary key
+"ingredient" | string           | /
+"name" | string           | /
+"prevents" | [string, string] | List of conditions (strings) which medicine can prevent
+"treats" | [string, string] | List of conditions (strings) which medicine can treat
+
+### Response
+Code | Meaning
+---------- | -------
+200| Success
+400| Error -- You must provide a product ID
+400| Error -- PolypharmData API error
+
 ## Get product
 Returns a product model from a product ID
+
+### HTTP Request
+
+>Example code
+
+```python
+response = requests.get('http://127.0.0.1:8000/polypharm/product/<id>')
+```
+
+`GET http://mobile-api.polypharm.solutions/polypharm/product/2554`
+
+### Route parameter
+
+parameter | type | description        
+------ |------| -------------------|
+id | int  | ID of the product
+
+### Returns
+
+> GET returns response body
+
+````json
+{
+  "atc": "M01AE01",
+  "brand_name": "Ibuprofen Belupo",
+  "dose": 800.0,
+  "drug_id": 1691,
+  "indication": "NaN",
+  "local_generic_name": "ibuprofen ",
+  "manufacturer": "Belupo",
+  "prescribing_level": "NaN",
+  "quantity": 30.0,
+  "route": "O",
+  "unit": "mg"
+}
+````
+
+{
+  "atc": string,
+  "brand_name": string,
+  "dose": float,
+  "drug_id": int,
+  "indication": string,
+  "local_generic_name": string,
+  "manufacturer": string,
+  "prescribing_level": string,
+  "quantity": float,
+  "route": string,
+  "unit": string
+}
+
+fields | type   | description
+------ |--------| -----------
+atc | string | /
+brand_name | string | /
+dose | float  | How strong it is, e.g. 30mg
+drug_id | int    | /
+indication | string | /
+local_generic_name | string | /
+manufacturer | string | /
+prescribing_level | string | Who can prescribe it
+quantity | float  | How many are in a box of the product
+route | string | How do you take it
+unit | string | What is the unit, e.g. in mg
+
+### Response
+Code | Meaning
+---------- | -------
+200| Success
+400| Error -- You must provide a product ID
+400| Error -- PolypharmData API error
 
 ## Analyze regimen
 Analyzes current user's regimen
