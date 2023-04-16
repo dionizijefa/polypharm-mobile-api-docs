@@ -322,6 +322,44 @@ Adds a medication to therapy model.
 Requires an authorization header.
 </aside>
 
+### HTTP Request
+
+>Example code
+
+```python
+headers = {'Authorization': "kg94385kgdsfj"}
+body = {'conditions': ['Headache', 'Stomach pain']}
+response = requests.get('http://127.0.0.1:8000/user/conditions', headers=header, body=body)
+```
+
+`GET http://mobile-api.polypharm.solutions/user/me`
+
+## Request Body
+
+>Example body
+
+````json
+{
+  "conditions": ["Headache", "Stomach Pain"]
+}
+````
+
+
+{
+  "conditions": ["Headache", "Stomach pain"]
+}
+
+fields | type                     | description
+------ |--------------------------| -----------
+"conditions" | [string, string, string] | List of strings
+
+### Response
+Code | Meaning
+---------- | -------
+200| Success -- Conditions updated successfully
+400| Error -- Conditions field is required
+403| Error -- Invalid access token
+
 ## Add Appointment
 Adds an appointment to appointment model.
 <aside class="notice">
@@ -344,7 +382,105 @@ Requires an authorization header.
 Functionalities that are related to personalized medicine selection and/or evaluation.
 
 ## Find drug
-Finds both products and ingredients from a query string
+Searches a user input string to find a product or an active ingredient
+
+### HTTP Request
+
+>Example code
+
+```python
+response = requests.get('http://127.0.0.1:8000/polypharm/find_drug?string=iburpforen')
+```
+
+`GET http://mobile-api.polypharm.solutions/polypharm/find_drug`
+
+### Query parameters
+
+parameter | type   | description        
+------ |--------| -------------------|
+"string" | string | Whatever you're looking for
+
+### Returns
+
+> GET returns response body
+
+````json
+{
+  "Ingredients": [
+    {
+      "id": 1691, 
+      "name": "ibuprofen"
+    }
+  ],
+ "Products": [
+   {
+     "brand_name": "Ibuprofen Belupo",
+     "dose": 800.0,
+     "id": 2554,
+     "unit": "mg"
+   },
+  {
+    "brand_name": "Dalsy", 
+    "dose": 100.0, 
+    "id": 2555, 
+    "unit": "ml"
+  },
+  {
+    "brand_name": "Ibuprofen Alkaloid",
+    "dose": 100.0,
+    "id": 2557,
+    "unit": "ml"
+  },
+  {
+    "brand_name": "Dalsy forte",
+    "dose": 200.0, 
+    "id": 2558, 
+    "unit": "ml"
+  },
+  {
+    "brand_name": "Ibuprofen JGL",
+    "dose": 100.0, 
+    "id": 2559, 
+    "unit": "ml"
+  }]
+}
+````
+
+{
+  "Ingredients": ingredient,
+  "Products": product
+}
+
+fields | type       | description
+------ |------------| -----------
+"Ingredients" | ingredient | An active pharmaceutical ingredient
+"Products" | product    | A branded pharmaceutical product
+
+
+### ingredient
+
+fields | type    | description
+------ |---------| -----------
+id | integer | Primary key of the product
+name | string  | /
+
+### product
+
+fields | type            | description
+------ |-----------------| -----------
+brand_name | string          |
+dose | string          | How strong it is, e.g. 30 mg                                   
+id | integer         | Primary key of the product
+unit | integer         | How is it measured, e.g. in mg
+
+
+### Response
+Code | Meaning
+---------- | -------
+200| Success
+400| Error -- You must provide a valid query parameter string
+400| Error -- PolypharmData API error
+
 
 ## Get ingredient
 Returns an ingredient model from an ingredient ID
