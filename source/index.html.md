@@ -2,10 +2,7 @@
 title: API Reference
 
 language_tabs: # must be one of https://github.com/rouge-ruby/rouge/wiki/List-of-supported-languages-and-lexers
-  - shell
-  - ruby
   - python
-  - javascript
 
 toc_footers:
   - <a href='#'>Sign Up for a Developer Key</a>
@@ -25,221 +22,299 @@ meta:
 
 # Introduction
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+Welcome to PolypharmSolutions Mobile API Documentations. API is intended for use in PolypharmSolutions mobile application.
+The API is a work in progress.
 
-We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
-
-This example API documentation page was created with [Slate](https://github.com/slatedocs/slate). Feel free to edit it and use it as a base for your own API's documentation.
+This API documentation page was created with [Slate](https://github.com/slatedocs/slate).
 
 # Authentication
 
-> To authorize, use this code:
+API uses user keys to enable authentication. Routes are only accessible by users (disabled for development).
+Provide authorization header for each API request.
 
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-```
-
-```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here" \
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-```
-
-> Make sure to replace `meowmeowmeow` with your API key.
-
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
-
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: meowmeowmeow`
+`Authorization: kg94385kgdsfj`
 
 <aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+You must replace <code>kg94385kgdsfj</code> with your personal API key.
 </aside>
 
-# Kittens
+## Register
 
-## Get All Kittens
+Takes a user model, saves it to database and sends a registration confirmation mail.
 
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
+### HTTP Request
 
 ```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
+response = requests.post('http://127.0.0.1:8000/auth/register', json=user)
 ```
 
-```shell
-curl "http://example.com/api/kittens" \
-  -H "Authorization: meowmeowmeow"
-```
 
-```javascript
-const kittn = require('kittn');
+`POST http://mobile-api.polypharm.solutions/auth/register`
 
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
-```
+### Request Body
 
-> The above command returns JSON structured like this:
+Takes in a nested JSON with user and userDetails Objects 
+
+> Example user
 
 ```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
+{
+  "user": {
+    "email": "email@email.com",
+    "password": "password123"
   },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
+  "userDetails": {
+    "firstName": "Ivan",
+    "lastName": "Horvat",
+    "birthYear": 1978,
+    "sex": "male",
+    "height": 193,
+    "weight": 105,
+    "condition": ["Alcoholism", "Headache", "Hypertension"],
+    "userDiscovery": "Doctor"
   }
-]
+}
 ```
 
-This endpoint retrieves all kittens.
+### Body
+
+{
+  "user": user,
+  "userDetails": userDetails
+}
+
+fields | type         | description
+------ |--------------| -----------
+"user" | user         | See below for description
+"userDetails" | userDetails  | See below for description
+
+
+### user
+
+fields | type | description
+------ | ---- | -----------
+email | string | /
+password | string | /
+
+### userDetails
+
+fields | type            | description
+------ |-----------------| -----------
+firstName | string          |
+lastName | string          | /                                   
+birthYear | integer         | year as integer                               
+sex | "male" OR "female" | /                                             
+height | integer         | in cm                                         
+weight | integer         | in kg                                         
+condition | [string, string] | list of strings                               
+userDiscovery |  string         | where did user hear about us, simple dropdown
+
+### Response
+Code | Meaning
+---------- | -------
+200| Success -- Registration successful
+403| Error -- User already exists
+
+
+
+
+## Login
+
+Produces an authorization token, used for accessing routes.
 
 ### HTTP Request
 
-`GET http://example.com/api/kittens`
+```python
+response = requests.post('http://127.0.0.1:8000/auth/login', json=login_data)
+```
 
-### Query Parameters
 
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
+`POST http://mobile-api.polypharm.solutions/auth/login`
 
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
+### Body
+
+> Example body
+
+````json
+{
+   "email": "email@email.com",
+   "password": "password123"`
+}
+````
+
+fields | type | description
+------ | ---- | -----------
+email | string | /
+password | string | /
+
+### Returns
+
+> The POST returns response body
+
+````json
+{
+   "Authorization": "kg94385kgdsfj",
+}
+````
+
+{"Authorization":  "kg94385kgdsfj"}
+
+fields | type            | description
+------ |-----------------| -----------
+Authorization | string          | An authorization token used for verifying users
+
+
+### Response
+
+Code | Meaning
+---------- | -------
+200| Success -- Login successful
+404| Error -- User not found
+404| Error -- Password incorrect
+
+# User
+User related operations
+
+## Me
+Returns user profile
+
+<aside class="notice">
+Requires an authorization header.
 </aside>
 
-## Get a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2" \
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
-}
-```
-
-This endpoint retrieves a specific kitten.
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-
 ### HTTP Request
 
-`GET http://example.com/kittens/<ID>`
+>Set Authorization headers
 
-### URL Parameters
+````json
+{
+  "Authorization": "kg94385kgdsfj"
+}
+````
 
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
-
-## Delete a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.delete(2)
-```
+>Example code
 
 ```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.delete(2)
+headers = {'Authorization': "kg94385kgdsfj"}
+response = requests.get('http://127.0.0.1:8000/user/me', headers=header)
 ```
 
-```shell
-curl "http://example.com/api/kittens/2" \
-  -X DELETE \
-  -H "Authorization: meowmeowmeow"
-```
+`GET http://mobile-api.polypharm.solutions/user/me`
 
-```javascript
-const kittn = require('kittn');
+### Returns
 
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.delete(2);
-```
+> The POST returns response body
 
-> The above command returns JSON structured like this:
-
-```json
+````json
 {
-  "id": 2,
-  "deleted" : ":("
+  "userModel": {
+    "createdOn": "2023-04-16T15:07:40.010492",
+    "email": "example@mail.com",
+    "id": 3,
+    "passwordHash": "$6$rounds=656"},
+  "userDetails": {
+    "weight": 85,
+    "firstName": "Ivan",
+    "condition": ["Alcholism", "Something else"],
+    "birthYear": 1952,
+    "lastName": "Horvat",
+    "userDiscovery": "Facebook",
+    "id": 1,
+    "height": 175,
+   "sex": "male"
+  }
 }
-```
+````
 
-This endpoint deletes a specific kitten.
+{
+  "userModel": userModel,
+  "userDetails": userDetails
+}
 
-### HTTP Request
+fields | type        | description
+------ |-------------| -----------
+"userModel" | userModel   | See below for description
+"userDetails" | userDetails | See below for description
 
-`DELETE http://example.com/kittens/<ID>`
 
-### URL Parameters
+### userModel
 
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to delete
+fields | type | description
+------ | ---- | -----------
+email | string | /
+passwordHash | string | /
+id | integer | /
+created_on | datetime |
 
+### userDetails
+
+fields | type            | description
+------ |-----------------| -----------
+firstName | string          |
+lastName | string          | /                                   
+birthYear | integer         | year as integer                               
+sex | "male" OR "female" | /                                             
+height | integer         | in cm                                         
+weight | integer         | in kg                                         
+condition | [string, string] | list of strings                               
+userDiscovery |  string         | where did user hear about us, simple dropdown
+
+### Response
+Code | Meaning
+---------- | -------
+200| Success 
+403| Error -- Invalid access token
+
+## Update Condition
+Changes user condition. For example if user gets over a condition or has a new one.
+<aside class="notice">
+Requires an authorization header.
+</aside>
+
+## Add Therapy
+Adds a medication to therapy model.
+<aside class="notice">
+Requires an authorization header.
+</aside>
+
+## Add Appointment
+Adds an appointment to appointment model.
+<aside class="notice">
+Requires an authorization header.
+</aside>
+
+## Finish Therapy
+Finishes a therapy as completed or discontinued or something like that.
+<aside class="notice">
+Requires an authorization header.
+</aside>
+
+## Finish Appointment
+Finishes an appointment as completed or missed.
+<aside class="notice">
+Requires an authorization header.
+</aside>
+
+# Polypharm
+Functionalities that are related to personalized medicine selection and/or evaluation.
+
+## Find drug
+Finds both products and ingredients from a query string
+
+## Get ingredient
+Returns an ingredient model from an ingredient ID
+
+## Get product
+Returns a product model from a product ID
+
+## Analyze regimen
+Analyzes current user's regimen
+<aside class="notice">
+Requires an authorization header.
+</aside>
+
+## Scan drug
+Evaluates how an addition of a new drug would influence patient's current regimen
+<aside class="notice">
+Requires an authorization header.
+</aside>
