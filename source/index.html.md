@@ -288,7 +288,7 @@ body = {'conditions': ['Headache', 'Stomach pain']}
 response = requests.get('http://127.0.0.1:8000/user/conditions', headers=header, body=body)
 ```
 
-`GET http://mobile-api.polypharm.solutions/user/me`
+`GET http://mobile-api.polypharm.solutions/user/conditions`
 
 ### Request Body
 
@@ -675,7 +675,7 @@ requests.get('http://127.0.0.1:8000/user/rate_wellbeing/5', headers=headers)
 
 ### HTTP Request
 
-`GET http://mobile-api.polypharm.solutions/user/rate_wellbeing/<int:rating>`
+`GET http://mobile-api.polypharm.solutions/user/rate_wellbeing/<rating>`
 
 ### Route parameters
 
@@ -686,13 +686,13 @@ rating | int  | Daily wellbeing rating
 ### Response
 Code | Meaning
 ---------- | -------
-200| Success -- Appointment added successfully
+200| Success -- Daily wellbeing rated successfully!
 403| Error -- Invalid access token
 
 # Polypharm
 Functionalities that are related to personalized medicine selection and/or evaluation.
 
-## Get Conditions
+## Conditions
 Returns a list of all conditions that a user can input.
 
 ### HTTP Request
@@ -834,7 +834,7 @@ Code | Meaning
 400| Error -- PolypharmData API error
 
 
-## Get ingredient
+## Ingredient
 Returns an ingredient model from an ingredient ID
 
 ### HTTP Request
@@ -921,7 +921,7 @@ Code | Meaning
 400| Error -- You must provide a product ID
 400| Error -- PolypharmData API error
 
-## Get product
+## Product
 Returns a product model from a product ID
 
 ### HTTP Request
