@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <meta
             name="description"
-            content="Documentation for the Kittn API"
+            content="Documentation for the Polypharm mobile API"
         >
     <title>API Reference</title>
 
@@ -339,9 +339,6 @@
                     <a href="#add-therapy" class="toc-h2 toc-link" data-title="Add Therapy">Add Therapy</a>
                   </li>
                   <li>
-                    <a href="#request-body-3" class="toc-h2 toc-link" data-title="Request Body">Request Body</a>
-                  </li>
-                  <li>
                     <a href="#get-active-therapies" class="toc-h2 toc-link" data-title="Get Active Therapies">Get Active Therapies</a>
                   </li>
                   <li>
@@ -381,9 +378,6 @@
                   </li>
               </ul>
           </li>
-          <li>
-            <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
-          </li>
       </ul>
         <ul class="toc-footer">
             <li><a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a></li>
@@ -394,12 +388,12 @@
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
 <p>Welcome to PolypharmSolutions Mobile API Documentations. API is intended for use in PolypharmSolutions mobile application.
-The API is a work in progress.</p>
+The API is work in progress.</p>
 
 <p>This API documentation page was created with <a href="https://github.com/slatedocs/slate">Slate</a>.</p>
 <h1 id='authentication'>Authentication</h1>
-<p>API uses user keys to enable authentication. Routes are only accessible by users (disabled for development).
-Provide authorization header for each API request.</p>
+<p>API uses user keys to enable authentication. Routes are only valid when used with an authorization header.
+Provide authorization header for each API request. The authorization key is recieved by logging in.</p>
 
 <p><code>Authorization: kg94385kgdsfj</code></p>
 
@@ -871,7 +865,7 @@ Requires an authorization header.
 </aside></p>
 <h3 id='http-request-5'>HTTP Request</h3>
 <p><code>POST http://mobile-api.polypharm.solutions/user/add_therapy</code></p>
-<h2 id='request-body-3'>Request Body</h2>
+<h3 id='request-body-3'>Request Body</h3>
 <blockquote>
 <p>Example body</p>
 </blockquote>
@@ -1498,73 +1492,287 @@ Requires an authorization header.
 </tr>
 </tbody></table>
 <h2 id='analyze-regimen'>Analyze regimen</h2>
-<p>Analyzes current user&#39;s regimen
+<p>Analyzes current user&#39;s active therapeutic regimen.
 <aside class="notice">
 Requires an authorization header.
 </aside></p>
-<h2 id='scan-drug'>Scan drug</h2>
-<p>Evaluates how an addition of a new drug would influence patient&#39;s current regimen
-<aside class="notice">
-Requires an authorization header.
-</aside></p>
-<h1 id='errors'>Errors</h1>
-<aside class="notice">
-This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
-</aside>
+<h3 id='http-request-10'>HTTP Request</h3>
+<blockquote>
+<p>Example code</p>
+</blockquote>
+<div class="highlight"><pre class="highlight python tab-python"><code><span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'http://127.0.0.1:8000/polypharm/analyze_regimen'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+</code></pre></div>
+<p><code>GET http://mobile-api.polypharm.solutions/polypharm/analyze_regimen</code></p>
+<h3 id='returns-7'>Returns</h3>
+<blockquote>
+<p>GET returns response body</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"contraindications"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="nl">"condition"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Drug Hypersensitivity"</span><span class="p">,</span><span class="w"> </span><span class="nl">"drug"</span><span class="p">:</span><span class="w"> </span><span class="mi">363</span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="nl">"condition"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hyperaldosteronism"</span><span class="p">,</span><span class="w"> </span><span class="nl">"drug"</span><span class="p">:</span><span class="w"> </span><span class="mi">363</span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="nl">"condition"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hypotension"</span><span class="p">,</span><span class="w"> </span><span class="nl">"drug"</span><span class="p">:</span><span class="w"> </span><span class="mi">363</span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="nl">"condition"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pregnancy"</span><span class="p">,</span><span class="w"> </span><span class="nl">"drug"</span><span class="p">:</span><span class="w"> </span><span class="mi">363</span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="nl">"condition"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Asthma"</span><span class="p">,</span><span class="w"> </span><span class="nl">"drug"</span><span class="p">:</span><span class="w"> </span><span class="mi">1691</span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="nl">"condition"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Drug Hypersensitivity"</span><span class="p">,</span><span class="w"> </span><span class="nl">"drug"</span><span class="p">:</span><span class="w"> </span><span class="mi">1691</span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="nl">"condition"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pregnancy Trimester, Third"</span><span class="p">,</span><span class="w"> </span><span class="nl">"drug"</span><span class="p">:</span><span class="w"> </span><span class="mi">1691</span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="nl">"condition"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pregnancy, Abdominal"</span><span class="p">,</span><span class="w"> </span><span class="nl">"drug"</span><span class="p">:</span><span class="w"> </span><span class="mi">1691</span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="nl">"condition"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rhinitis"</span><span class="p">,</span><span class="w"> </span><span class="nl">"drug"</span><span class="p">:</span><span class="w"> </span><span class="mi">1691</span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="nl">"condition"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bronchial Hyperreactivity"</span><span class="p">,</span><span class="w"> </span><span class="nl">"drug"</span><span class="p">:</span><span class="w"> </span><span class="mi">1691</span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="nl">"condition"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Drug Hypersensitivity"</span><span class="p">,</span><span class="w"> </span><span class="nl">"drug"</span><span class="p">:</span><span class="w"> </span><span class="mi">3220</span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="nl">"condition"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Lactation"</span><span class="p">,</span><span class="w"> </span><span class="nl">"drug"</span><span class="p">:</span><span class="w"> </span><span class="mi">3220</span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="nl">"condition"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Liver Diseases"</span><span class="p">,</span><span class="w"> </span><span class="nl">"drug"</span><span class="p">:</span><span class="w"> </span><span class="mi">3220</span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="nl">"condition"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pregnancy"</span><span class="p">,</span><span class="w"> </span><span class="nl">"drug"</span><span class="p">:</span><span class="w"> </span><span class="mi">3220</span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="nl">"condition"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Liver Failure"</span><span class="p">,</span><span class="w"> </span><span class="nl">"drug"</span><span class="p">:</span><span class="w"> </span><span class="mi">3220</span><span class="p">}],</span><span class="w">
+  </span><span class="nl">"interactionAde"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"condition_concept_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hypertensive emergency"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"drug_1_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">363</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"drug_2_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3220</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"significance"</span><span class="p">:</span><span class="w"> </span><span class="mf">3.345304142782046</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"condition_concept_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Colitis microscopic"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"drug_1_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1691</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"drug_2_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3220</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"significance"</span><span class="p">:</span><span class="w"> </span><span class="mf">3.204154230157523</span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"condition_concept_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Diabetic neuropathy"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"drug_1_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1691</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"drug_2_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3220</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"significance"</span><span class="p">:</span><span class="w"> </span><span class="mf">2.661118035930371</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"condition_concept_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Spinal osteoarthritis"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"drug_1_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">363</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"drug_2_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1691</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"significance"</span><span class="p">:</span><span class="w"> </span><span class="mf">2.550854985988092</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"condition_concept_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Neutrophilic dermatosis"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"drug_1_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">363</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"drug_2_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3220</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"significance"</span><span class="p">:</span><span class="w"> </span><span class="mf">2.549737785988092</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"interactionCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"interactions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The metabolism of Atorvastatin can be decreased when combined with Losartan."</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"drug_1_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">363</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"drug_2_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3220</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">842954</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Drugbank"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The risk or severity of renal failure, hyperkalemia, and hypertension can be increased when Losartan is combined with Ibuprofen."</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"drug_1_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">363</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"drug_2_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1691</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">843044</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Drugbank"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The metabolism of Atorvastatin can be decreased when combined with Ibuprofen."</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"drug_1_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1691</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"drug_2_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3220</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1259755</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Drugbank"</span><span class="w">
+    </span><span class="p">}],</span><span class="w">
 
-<p>The Kittn API uses the following error codes:</p>
-
+  </span><span class="nl">"isGenderRisk"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"isPriorityInteraction"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"pharmacogenomics"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Informative PGx"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"drug"</span><span class="p">:</span><span class="w"> </span><span class="mi">3220</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"gene"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SLCO1B1"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"guideline"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://cpicpgx.org/guidelines/cpic-guideline-for-statins/"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Informative PGx"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"drug"</span><span class="p">:</span><span class="w"> </span><span class="mi">3220</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"gene"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LDLR"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"guideline"</span><span class="p">:</span><span class="w"> </span><span class="err">None</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
 <table><thead>
 <tr>
-<th>Error Code</th>
+<th>fields</th>
+<th>type</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>&quot;contraindications&quot;</td>
+<td>object</td>
+<td>Corresponds to user&#39;s condition field</td>
+</tr>
+<tr>
+<td>&quot;interactionAde&quot;</td>
+<td>object</td>
+<td>Some possible side effects from interactions</td>
+</tr>
+<tr>
+<td>&quot;isGenderRisk&quot;</td>
+<td>int</td>
+<td>Is risk gender stratisfied</td>
+</tr>
+<tr>
+<td>&quot;isPriorityInteraction&quot;</td>
+<td>int</td>
+<td>If it&#39;s priority it mustn&#39;t be prescribed</td>
+</tr>
+<tr>
+<td>&quot;pharmacogenomics&quot;</td>
+<td>object</td>
+<td>Pharmacogenomics of the drugs</td>
+</tr>
+<tr>
+<td>&quot;interactionCount&quot;</td>
+<td>int</td>
+<td>How many interactions are in th etherapy</td>
+</tr>
+<tr>
+<td>&quot;interactions&quot;</td>
+<td>object</td>
+<td>The interactions</td>
+</tr>
+</tbody></table>
+<h3 id='contraindications-object'>contraindications object</h3>
+<table><thead>
+<tr>
+<th>fields</th>
+<th>type</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>&quot;condition&quot;</td>
+<td>string</td>
+<td>Corresponds to user&#39;s condition field</td>
+</tr>
+<tr>
+<td>&quot;drug&quot;</td>
+<td>int</td>
+<td>Ingredient ID</td>
+</tr>
+</tbody></table>
+<h3 id='interactionade-object'>interactionAde object</h3>
+<table><thead>
+<tr>
+<th>fields</th>
+<th>type</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>&quot;condition_concept_name&quot;</td>
+<td>string</td>
+<td>Condition</td>
+</tr>
+<tr>
+<td>&quot;drug_1_id&quot;</td>
+<td>int</td>
+<td>Ingredient ID</td>
+</tr>
+<tr>
+<td>&quot;drug_2_id&quot;</td>
+<td>int</td>
+<td>Ingredient ID</td>
+</tr>
+</tbody></table>
+<h3 id='pharmacogenomics-object'>pharmacogenomics object</h3>
+<table><thead>
+<tr>
+<th>fields</th>
+<th>type</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>&quot;action&quot;</td>
+<td>string</td>
+<td>Importance of the gene drug interaction</td>
+</tr>
+<tr>
+<td>&quot;drug&quot;</td>
+<td>int</td>
+<td>Ingredient ID</td>
+</tr>
+<tr>
+<td>&quot;gene&quot;</td>
+<td>string</td>
+<td>Gene name</td>
+</tr>
+<tr>
+<td>&quot;guideline&quot;</td>
+<td>string</td>
+<td>Url for action to be taken</td>
+</tr>
+</tbody></table>
+<h3 id='interactions-object'>interactions object</h3>
+<table><thead>
+<tr>
+<th>fields</th>
+<th>type</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>&quot;description&quot;</td>
+<td>string</td>
+<td>Condition</td>
+</tr>
+<tr>
+<td>&quot;drug_1_id&quot;</td>
+<td>int</td>
+<td>Ingredient ID</td>
+</tr>
+<tr>
+<td>&quot;drug_2_id&quot;</td>
+<td>int</td>
+<td>Ingredient ID</td>
+</tr>
+<tr>
+<td>&quot;id&quot;</td>
+<td>int</td>
+<td>Interaction id</td>
+</tr>
+<tr>
+<td>&quot;source&quot;</td>
+<td>string</td>
+<td>source database</td>
+</tr>
+</tbody></table>
+<h3 id='response-10'>Response</h3>
+<table><thead>
+<tr>
+<th>Code</th>
 <th>Meaning</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>400</td>
-<td>Bad Request -- Your request is invalid.</td>
+<td>200</td>
+<td>Success</td>
 </tr>
 <tr>
-<td>401</td>
-<td>Unauthorized -- Your API key is wrong.</td>
+<td>400</td>
+<td>Error -- PolypharmData API error</td>
 </tr>
 <tr>
 <td>403</td>
-<td>Forbidden -- The kitten requested is hidden for administrators only.</td>
-</tr>
-<tr>
-<td>404</td>
-<td>Not Found -- The specified kitten could not be found.</td>
-</tr>
-<tr>
-<td>405</td>
-<td>Method Not Allowed -- You tried to access a kitten with an invalid method.</td>
-</tr>
-<tr>
-<td>406</td>
-<td>Not Acceptable -- You requested a format that isn&#39;t json.</td>
-</tr>
-<tr>
-<td>410</td>
-<td>Gone -- The kitten requested has been removed from our servers.</td>
-</tr>
-<tr>
-<td>418</td>
-<td>I&#39;m a teapot.</td>
-</tr>
-<tr>
-<td>429</td>
-<td>Too Many Requests -- You&#39;re requesting too many kittens! Slow down!</td>
-</tr>
-<tr>
-<td>500</td>
-<td>Internal Server Error -- We had a problem with our server. Try again later.</td>
-</tr>
-<tr>
-<td>503</td>
-<td>Service Unavailable -- We&#39;re temporarily offline for maintenance. Please try again later.</td>
+<td>Error -- Invalid access token</td>
 </tr>
 </tbody></table>
+<h2 id='scan-drug'>Scan drug</h2>
+<p>Evaluates how an addition of a new drug would influence patient&#39;s current regimen. It is different from analyze 
+is that it returns only the interactions which are between the new drug and the rest of the regimen. It is complementary
+to analyze regimen.
+<aside class="notice">
+Requires an authorization header.
+</aside></p>
 
       </div>
       <div class="dark-box">
