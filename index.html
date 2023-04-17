@@ -339,19 +339,22 @@
                     <a href="#add-therapy" class="toc-h2 toc-link" data-title="Add Therapy">Add Therapy</a>
                   </li>
                   <li>
-                    <a href="#get-active-therapies" class="toc-h2 toc-link" data-title="Get Active Therapies">Get Active Therapies</a>
+                    <a href="#active-therapies" class="toc-h2 toc-link" data-title="Active Therapies">Active Therapies</a>
                   </li>
                   <li>
-                    <a href="#finish-therapy" class="toc-h2 toc-link" data-title="Finish Therapy">Finish Therapy</a>
+                    <a href="#complete-therapy" class="toc-h2 toc-link" data-title="Complete Therapy">Complete Therapy</a>
                   </li>
                   <li>
                     <a href="#add-appointment" class="toc-h2 toc-link" data-title="Add Appointment">Add Appointment</a>
                   </li>
                   <li>
-                    <a href="#get-active-appointments" class="toc-h2 toc-link" data-title="Get Active Appointments">Get Active Appointments</a>
+                    <a href="#active-appointments" class="toc-h2 toc-link" data-title="Active Appointments">Active Appointments</a>
                   </li>
                   <li>
-                    <a href="#finish-appointment" class="toc-h2 toc-link" data-title="Finish Appointment">Finish Appointment</a>
+                    <a href="#complete-appointment" class="toc-h2 toc-link" data-title="Complete Appointment">Complete Appointment</a>
+                  </li>
+                  <li>
+                    <a href="#daily-wellbeing-rating" class="toc-h2 toc-link" data-title="Daily Wellbeing Rating">Daily Wellbeing Rating</a>
                   </li>
               </ul>
           </li>
@@ -976,43 +979,488 @@ Requires an authorization header.
 <td>Error -- Invalid access token</td>
 </tr>
 </tbody></table>
-<h2 id='get-active-therapies'>Get Active Therapies</h2>
+<h2 id='active-therapies'>Active Therapies</h2>
 <p>Get all active therapies
 <aside class="notice">
 Requires an authorization header.
 </aside></p>
-<h2 id='finish-therapy'>Finish Therapy</h2>
-<p>Finishes a therapy as completed or discontinued or something like that.
+
+<blockquote>
+<p>Example code</p>
+</blockquote>
+<div class="highlight"><pre class="highlight python tab-python"><code><span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'http://127.0.0.1:8000/user/active_therapies'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">).</span><span class="n">json</span><span class="p">()</span>
+</code></pre></div><h3 id='http-request-6'>HTTP Request</h3>
+<p><code>GET http://mobile-api.polypharm.solutions/user/active_therapies</code></p>
+<h3 id='returns-3'>Returns</h3>
+<blockquote>
+<p>GET returns response body</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"dose"</span><span class="p">:</span><span class="w"> </span><span class="mf">800.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mf">3.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"productId"</span><span class="p">:</span><span class="w"> </span><span class="mi">2554</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"treats"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Headache"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"frequency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"daily"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"startDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-04-16T23:38:27.363363"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"createdOn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-04-16T23:38:25.281431"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"endDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-04-16T23:38:27.363380"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"isCompleted"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"duration"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mg"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"timeOfDay"</span><span class="p">:</span><span class="w"> </span><span class="s2">"14:30:00"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"drugId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1691</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+ </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"dose"</span><span class="p">:</span><span class="w"> </span><span class="mf">800.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mf">3.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"productId"</span><span class="p">:</span><span class="w"> </span><span class="mi">884</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"treats"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Headache"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"frequency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"daily"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"startDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-04-17T10:01:02.249621"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"createdOn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-04-17T09:25:25.711994"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"endDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-04-17T10:01:02.249639"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"isCompleted"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"duration"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mg"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"timeOfDay"</span><span class="p">:</span><span class="w"> </span><span class="s2">"14:30:00"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"drugId"</span><span class="p">:</span><span class="w"> </span><span class="mi">363</span><span class="w">
+ </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<p>[
+  {UserTherapy},
+  {UserTherapy}
+]</p>
+
+<table><thead>
+<tr>
+<th>fields</th>
+<th>type</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>/</td>
+<td>list of UserTherapy objects</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id='usertherapy-object'>UserTherapy object</h3>
+<table><thead>
+<tr>
+<th>fields</th>
+<th>type</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>&quot;id&quot;</td>
+<td>int</td>
+<td>UserTherapy ID</td>
+</tr>
+<tr>
+<td>&quot;drugId&quot;</td>
+<td>int</td>
+<td>Ingredient ID</td>
+</tr>
+<tr>
+<td>&quot;productId&quot;</td>
+<td>int</td>
+<td>Product ID</td>
+</tr>
+<tr>
+<td>&quot;dose&quot;</td>
+<td>float</td>
+<td>How strong is the medicine, e.g. 30mg</td>
+</tr>
+<tr>
+<td>&quot;unit&quot;</td>
+<td>string</td>
+<td>How is it measured</td>
+</tr>
+<tr>
+<td>&quot;quantity&quot;</td>
+<td>int</td>
+<td>How many to take each time</td>
+</tr>
+<tr>
+<td>&quot;frequency&quot;</td>
+<td>string</td>
+<td>How often to take</td>
+</tr>
+<tr>
+<td>&quot;duration&quot;</td>
+<td>int</td>
+<td>How many days is the therapy</td>
+</tr>
+<tr>
+<td>&quot;treats&quot;</td>
+<td>string</td>
+<td>What is it for</td>
+</tr>
+<tr>
+<td>&quot;startDate&quot;</td>
+<td>DateTime string</td>
+<td>/</td>
+</tr>
+<tr>
+<td>&quot;endDate&quot;</td>
+<td>DateTime string</td>
+<td>/</td>
+</tr>
+<tr>
+<td>&quot;createdOn&quot;</td>
+<td>DateTime string</td>
+<td>/</td>
+</tr>
+<tr>
+<td>&quot;timeOfDay&quot;</td>
+<td>Time string</td>
+<td>When to take</td>
+</tr>
+<tr>
+<td>&quot;isCompleted&quot;</td>
+<td>int</td>
+<td>Is it finished</td>
+</tr>
+</tbody></table>
+<h3 id='response-6'>Response</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td>Success</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Error -- Invalid access token</td>
+</tr>
+</tbody></table>
+<h2 id='complete-therapy'>Complete Therapy</h2>
+<p>Completes a therapy due to completion or discontinuation.
 <aside class="notice">
 Requires an authorization header.
 </aside></p>
+
+<blockquote>
+<p>Example code</p>
+</blockquote>
+<div class="highlight"><pre class="highlight python tab-python"><code><span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'http://127.0.0.1:8000/user/complete_therapy/1'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+</code></pre></div><h3 id='http-request-7'>HTTP Request</h3>
+<p><code>GET http://mobile-api.polypharm.solutions/user/complete_therapy/&lt;therapy_id&gt;</code></p>
+<h3 id='route-parameters'>Route parameters</h3>
+<table><thead>
+<tr>
+<th>parameter</th>
+<th>type</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>therapy_id</td>
+<td>int</td>
+<td>ID of the therapy to be completed</td>
+</tr>
+</tbody></table>
+<h3 id='response-7'>Response</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td>Success -- Therapy added successfully</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Error -- Invalid access token</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Error -- Therapy not found</td>
+</tr>
+</tbody></table>
 <h2 id='add-appointment'>Add Appointment</h2>
 <p>Adds an appointment to appointment model.
 <aside class="notice">
 Requires an authorization header.
 </aside></p>
-<h2 id='get-active-appointments'>Get Active Appointments</h2>
+
+<blockquote>
+<p>Example code</p>
+</blockquote>
+<div class="highlight"><pre class="highlight python tab-python"><code><span class="n">appointment</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'doctor'</span><span class="p">:</span> <span class="s">'Mr. Md Doctor'</span><span class="p">,</span>
+    <span class="s">'institution'</span><span class="p">:</span> <span class="s">'Rebro'</span><span class="p">,</span>
+    <span class="s">'date'</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="p">.</span><span class="n">now</span><span class="p">()),</span>
+<span class="p">}</span>
+<span class="n">requests</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="s">'http://127.0.0.1:8000/user/add_appointment'</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">appointment</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+</code></pre></div><h3 id='http-request-8'>HTTP Request</h3>
+<p><code>POST http://mobile-api.polypharm.solutions/user/add_appointment</code></p>
+<h3 id='request-body-4'>Request Body</h3>
+<blockquote>
+<p>Example body</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"doctor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mr. Md Doctor"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"institution"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rebro"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-04-17 13:45:05.207232"</span><span class="w">
+</span><span class="p">}</span><span class="w">   
+</span></code></pre></div>
+<p>{
+    &quot;doctor&quot;: &quot;Mr. Md Doctor&quot;,
+    &quot;institution&quot;: &quot;Rebro&quot;,
+    &quot;date&quot;: &quot;2023-04-17 13:45:05.207232&quot;
+}</p>
+
+<table><thead>
+<tr>
+<th>fields</th>
+<th>type</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>&quot;doctor&quot;</td>
+<td>string</td>
+<td>Doctor name</td>
+</tr>
+<tr>
+<td>&quot;institution&quot;</td>
+<td>string</td>
+<td>Institution name</td>
+</tr>
+<tr>
+<td>&quot;date&quot;</td>
+<td>string</td>
+<td>Datetime timestmap</td>
+</tr>
+</tbody></table>
+<h3 id='response-8'>Response</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td>Success -- Appointment added successfully</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Error -- Invalid access token</td>
+</tr>
+</tbody></table>
+<h2 id='active-appointments'>Active Appointments</h2>
 <p>Get all active appointments.
 <aside class="notice">
 Requires an authorization header.
 </aside></p>
-<h2 id='finish-appointment'>Finish Appointment</h2>
+
+<blockquote>
+<p>Example code</p>
+</blockquote>
+<div class="highlight"><pre class="highlight python tab-python"><code><span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'http://127.0.0.1:8000/user/active_appointments'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">).</span><span class="n">json</span><span class="p">()</span>
+</code></pre></div><h3 id='http-request-9'>HTTP Request</h3>
+<p><code>GET http://mobile-api.polypharm.solutions/user/active_appointments</code></p>
+<h3 id='returns-4'>Returns</h3>
+<blockquote>
+<p>GET returns response body</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"institution"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rebro"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"createdOn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-04-17T13:30:40.141132"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"doctor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mr. Md Doctor"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-04-17T13:34:26.990152"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"isCompleted"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<p>[
+  {UserAppointment},
+  {UserAppointment}
+]</p>
+
+<table><thead>
+<tr>
+<th>fields</th>
+<th>type</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>/</td>
+<td>list of UserAppointment objects</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id='userappointment-object'>UserAppointment object</h3>
+<table><thead>
+<tr>
+<th>fields</th>
+<th>type</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>&quot;id&quot;</td>
+<td>int</td>
+<td>UserAppointment ID</td>
+</tr>
+<tr>
+<td>&quot;date&quot;</td>
+<td>DateTime string</td>
+<td>Appointment date and time</td>
+</tr>
+<tr>
+<td>&quot;createdOn&quot;</td>
+<td>DateTime string</td>
+<td>/</td>
+</tr>
+<tr>
+<td>&quot;doctor&quot;</td>
+<td>string</td>
+<td>Name of the doctor</td>
+</tr>
+<tr>
+<td>&quot;institution&quot;</td>
+<td>string</td>
+<td>Name of the institution</td>
+</tr>
+<tr>
+<td>&quot;isCompleted&quot;</td>
+<td>int</td>
+<td>Is it finished</td>
+</tr>
+</tbody></table>
+<h3 id='response-9'>Response</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td>Success</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Error -- Invalid access token</td>
+</tr>
+</tbody></table>
+<h2 id='complete-appointment'>Complete Appointment</h2>
 <p>Finishes an appointment as completed or missed.
 <aside class="notice">
 Requires an authorization header.
 </aside></p>
+
+<blockquote>
+<p>Example code</p>
+</blockquote>
+<div class="highlight"><pre class="highlight python tab-python"><code><span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'http://127.0.0.1:8000/user/complete_appointment/1'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+</code></pre></div><h3 id='http-request-10'>HTTP Request</h3>
+<p><code>GET http://mobile-api.polypharm.solutions/user/complete_appointment/&lt;appointment_id&gt;</code></p>
+<h3 id='route-parameters-2'>Route parameters</h3>
+<table><thead>
+<tr>
+<th>parameter</th>
+<th>type</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>appointment_id</td>
+<td>int</td>
+<td>ID of the appointment to be completed</td>
+</tr>
+</tbody></table>
+<h3 id='response-10'>Response</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td>Success -- Appointment completed</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Error -- Invalid access token</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Error -- Appointment not found</td>
+</tr>
+</tbody></table>
+<h2 id='daily-wellbeing-rating'>Daily Wellbeing Rating</h2>
+<p>Rates the daily wellbeing.
+<aside class="notice">
+Requires an authorization header.
+</aside></p>
+
+<blockquote>
+<p>Example code</p>
+</blockquote>
+<div class="highlight"><pre class="highlight python tab-python"><code><span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'http://127.0.0.1:8000/user/rate_wellbeing/5'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+</code></pre></div><h3 id='http-request-11'>HTTP Request</h3>
+<p><code>GET http://mobile-api.polypharm.solutions/user/rate_wellbeing/&lt;int:rating&gt;</code></p>
+<h3 id='route-parameters-3'>Route parameters</h3>
+<table><thead>
+<tr>
+<th>parameter</th>
+<th>type</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>rating</td>
+<td>int</td>
+<td>Daily wellbeing rating</td>
+</tr>
+</tbody></table>
+<h3 id='response-11'>Response</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td>Success -- Appointment added successfully</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Error -- Invalid access token</td>
+</tr>
+</tbody></table>
 <h1 id='polypharm'>Polypharm</h1>
 <p>Functionalities that are related to personalized medicine selection and/or evaluation.</p>
 <h2 id='get-conditions'>Get Conditions</h2>
 <p>Returns a list of all conditions that a user can input.</p>
-<h3 id='http-request-6'>HTTP Request</h3>
+<h3 id='http-request-12'>HTTP Request</h3>
 <blockquote>
 <p>Example code</p>
 </blockquote>
 <div class="highlight"><pre class="highlight python tab-python"><code><span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'http://127.0.0.1:8000/polypharm/conditions'</span><span class="p">)</span>
 </code></pre></div>
 <p><code>GET http://mobile-api.polypharm.solutions/polypharm/conditions</code></p>
-<h3 id='returns-3'>Returns</h3>
+<h3 id='returns-5'>Returns</h3>
 <blockquote>
 <p>GET returns response body</p>
 </blockquote>
@@ -1028,7 +1476,7 @@ Requires an authorization header.
   &quot;Xeroderma Pigmentosum&quot;,
   ...
 ]</p>
-<h3 id='response-6'>Response</h3>
+<h3 id='response-12'>Response</h3>
 <table><thead>
 <tr>
 <th>Code</th>
@@ -1046,7 +1494,7 @@ Requires an authorization header.
 </tbody></table>
 <h2 id='find-drug'>Find drug</h2>
 <p>Searches a user input string to find a product or an active ingredient</p>
-<h3 id='http-request-7'>HTTP Request</h3>
+<h3 id='http-request-13'>HTTP Request</h3>
 <blockquote>
 <p>Example code</p>
 </blockquote>
@@ -1067,7 +1515,7 @@ Requires an authorization header.
 <td>Whatever you&#39;re looking for</td>
 </tr>
 </tbody></table>
-<h3 id='returns-4'>Returns</h3>
+<h3 id='returns-6'>Returns</h3>
 <blockquote>
 <p>GET returns response body</p>
 </blockquote>
@@ -1182,7 +1630,7 @@ Requires an authorization header.
 <td>How is it measured, e.g. in mg</td>
 </tr>
 </tbody></table>
-<h3 id='response-7'>Response</h3>
+<h3 id='response-13'>Response</h3>
 <table><thead>
 <tr>
 <th>Code</th>
@@ -1204,14 +1652,14 @@ Requires an authorization header.
 </tbody></table>
 <h2 id='get-ingredient'>Get ingredient</h2>
 <p>Returns an ingredient model from an ingredient ID</p>
-<h3 id='http-request-8'>HTTP Request</h3>
+<h3 id='http-request-14'>HTTP Request</h3>
 <blockquote>
 <p>Example code</p>
 </blockquote>
 <div class="highlight"><pre class="highlight python tab-python"><code><span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'http://127.0.0.1:8000/polypharm/ingredient/1691'</span><span class="p">)</span>
 </code></pre></div>
 <p><code>GET http://mobile-api.polypharm.solutions/polypharm/ingredient/&lt;id&gt;</code></p>
-<h3 id='route-parameter'>Route parameter</h3>
+<h3 id='route-parameters-4'>Route parameters</h3>
 <table><thead>
 <tr>
 <th>parameter</th>
@@ -1225,7 +1673,7 @@ Requires an authorization header.
 <td>ID of the ingredient</td>
 </tr>
 </tbody></table>
-<h3 id='returns-5'>Returns</h3>
+<h3 id='returns-7'>Returns</h3>
 <blockquote>
 <p>GET returns response body</p>
 </blockquote>
@@ -1333,7 +1781,7 @@ Requires an authorization header.
 <td>List of conditions (strings) which medicine can treat</td>
 </tr>
 </tbody></table>
-<h3 id='response-8'>Response</h3>
+<h3 id='response-14'>Response</h3>
 <table><thead>
 <tr>
 <th>Code</th>
@@ -1355,14 +1803,14 @@ Requires an authorization header.
 </tbody></table>
 <h2 id='get-product'>Get product</h2>
 <p>Returns a product model from a product ID</p>
-<h3 id='http-request-9'>HTTP Request</h3>
+<h3 id='http-request-15'>HTTP Request</h3>
 <blockquote>
 <p>Example code</p>
 </blockquote>
 <div class="highlight"><pre class="highlight python tab-python"><code><span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'http://127.0.0.1:8000/polypharm/product/2554'</span><span class="p">)</span>
 </code></pre></div>
 <p><code>GET http://mobile-api.polypharm.solutions/polypharm/product/&lt;id&gt;</code></p>
-<h3 id='route-parameter-2'>Route parameter</h3>
+<h3 id='route-parameter'>Route parameter</h3>
 <table><thead>
 <tr>
 <th>parameter</th>
@@ -1376,7 +1824,7 @@ Requires an authorization header.
 <td>ID of the product</td>
 </tr>
 </tbody></table>
-<h3 id='returns-6'>Returns</h3>
+<h3 id='returns-8'>Returns</h3>
 <blockquote>
 <p>GET returns response body</p>
 </blockquote>
@@ -1471,7 +1919,7 @@ Requires an authorization header.
 <td>What is the unit, e.g. in mg</td>
 </tr>
 </tbody></table>
-<h3 id='response-9'>Response</h3>
+<h3 id='response-15'>Response</h3>
 <table><thead>
 <tr>
 <th>Code</th>
@@ -1496,14 +1944,14 @@ Requires an authorization header.
 <aside class="notice">
 Requires an authorization header.
 </aside></p>
-<h3 id='http-request-10'>HTTP Request</h3>
+<h3 id='http-request-16'>HTTP Request</h3>
 <blockquote>
 <p>Example code</p>
 </blockquote>
 <div class="highlight"><pre class="highlight python tab-python"><code><span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'http://127.0.0.1:8000/polypharm/analyze_regimen'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
 </code></pre></div>
 <p><code>GET http://mobile-api.polypharm.solutions/polypharm/analyze_regimen</code></p>
-<h3 id='returns-7'>Returns</h3>
+<h3 id='returns-9'>Returns</h3>
 <blockquote>
 <p>GET returns response body</p>
 </blockquote>
@@ -1746,7 +2194,7 @@ Requires an authorization header.
 <td>source database</td>
 </tr>
 </tbody></table>
-<h3 id='response-10'>Response</h3>
+<h3 id='response-16'>Response</h3>
 <table><thead>
 <tr>
 <th>Code</th>
@@ -1773,7 +2221,7 @@ to analyze regimen.
 <aside class="notice">
 Requires an authorization header.
 </aside></p>
-<h3 id='http-request-11'>HTTP Request</h3>
+<h3 id='http-request-17'>HTTP Request</h3>
 <blockquote>
 <p>Example code</p>
 </blockquote>
@@ -1794,7 +2242,7 @@ Requires an authorization header.
 <td>Ingredient ID of a scanned drug</td>
 </tr>
 </tbody></table>
-<h3 id='returns-8'>Returns</h3>
+<h3 id='returns-10'>Returns</h3>
 <blockquote>
 <p>GET returns response body</p>
 </blockquote>
@@ -2019,7 +2467,7 @@ Requires an authorization header.
 <td>source database</td>
 </tr>
 </tbody></table>
-<h3 id='response-11'>Response</h3>
+<h3 id='response-17'>Response</h3>
 <table><thead>
 <tr>
 <th>Code</th>
