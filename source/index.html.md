@@ -916,6 +916,13 @@ response = requests.get('http://127.0.0.1:8000/polypharm/scan_drug?drug_id=1623'
 
 `GET http://mobile-api.polypharm.solutions/polypharm/scan_drug?drug_id=<param>`
 
+### Query parameters
+
+parameter | type | description        
+------ |------| -------------------|
+drug_id | int  | Ingredient ID of a scanned drug
+
+
 ### Returns
 
 > GET returns response body
