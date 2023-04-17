@@ -1780,6 +1780,20 @@ Requires an authorization header.
 <div class="highlight"><pre class="highlight python tab-python"><code><span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'http://127.0.0.1:8000/polypharm/scan_drug?drug_id=1623'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
 </code></pre></div>
 <p><code>GET http://mobile-api.polypharm.solutions/polypharm/scan_drug?drug_id=&lt;param&gt;</code></p>
+<h3 id='query-parameters-2'>Query parameters</h3>
+<table><thead>
+<tr>
+<th>parameter</th>
+<th>type</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>drug_id</td>
+<td>int</td>
+<td>Ingredient ID of a scanned drug</td>
+</tr>
+</tbody></table>
 <h3 id='returns-8'>Returns</h3>
 <blockquote>
 <p>GET returns response body</p>
