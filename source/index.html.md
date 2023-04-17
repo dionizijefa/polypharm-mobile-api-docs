@@ -401,17 +401,126 @@ Code | Meaning
 200| Success -- Therapy added successfully
 403| Error -- Invalid access token
 
-## Get Active Therapies
+## Active Therapies
 Get all active therapies
 <aside class="notice">
 Requires an authorization header.
 </aside>
 
-## Finish Therapy
-Finishes a therapy as completed or discontinued or something like that.
+>Example code
+
+```python
+requests.get('http://127.0.0.1:8000/user/active_therapies', headers=headers).json()
+```
+
+### HTTP Request
+
+`GET http://mobile-api.polypharm.solutions/user/active_therapies`
+
+### Returns
+
+> GET returns response body
+
+````json
+[
+  {
+    "dose": 800.0,
+    "quantity": 3.0,
+    "productId": 2554,
+    "treats": "Headache",
+    "frequency": "daily",
+    "startDate": "2023-04-16T23:38:27.363363",
+    "createdOn": "2023-04-16T23:38:25.281431",
+    "endDate": "2023-04-16T23:38:27.363380",
+    "isCompleted": 0,
+    "duration": 10,
+    "unit": "mg",
+    "timeOfDay": "14:30:00",
+    "id": 1,
+    "drugId": 1691
+  },
+ {
+    "dose": 800.0,
+    "quantity": 3.0,
+    "productId": 884,
+    "treats": "Headache",
+    "frequency": "daily",
+    "startDate": "2023-04-17T10:01:02.249621",
+    "createdOn": "2023-04-17T09:25:25.711994",
+    "endDate": "2023-04-17T10:01:02.249639",
+    "isCompleted": 0,
+    "duration": 10,
+    "unit": "mg",
+    "timeOfDay": "14:30:00",
+    "id": 2,
+    "drugId": 363
+ }
+]
+````
+
+[
+  {UserTherapy},
+  {UserTherapy}
+]
+
+fields | type                        | description
+------ |-----------------------------| -----------
+/   | list of UserTherapy objects | 
+
+### UserTherapy object
+
+fields | type            | description
+------ |-----------------| -----------
+"id" | int             | UserTherapy ID
+"drugId" | int             | Ingredient ID
+"productId" | int             | Product ID
+"dose" | float           | How strong is the medicine, e.g. 30mg
+"unit" | string          | How is it measured
+"quantity" | int             | How many to take each time
+"frequency" | string          | How often to take
+"duration" | int             | How many days is the therapy
+"treats" | string          | What is it for
+"startDate" | DateTime string | /
+"endDate" | DateTime string | /
+"createdOn" | DateTime string | /
+"timeOfDay" | Time string     | When to take
+"isCompleted" | int             | Is it finished
+
+
+### Response
+Code | Meaning
+---------- | -------
+200| Success
+403| Error -- Invalid access token
+
+
+## Complete Therapy
+Completes a therapy due to completion or discontinuation.
 <aside class="notice">
 Requires an authorization header.
 </aside>
+
+>Example code
+
+```python
+requests.get('http://127.0.0.1:8000/user/complete_therapy/1', headers=headers)
+```
+
+### HTTP Request
+
+`GET http://mobile-api.polypharm.solutions/user/complete_therapy/<therapy_id>`
+
+### Route parameters
+parameter | type | description        
+------ |------| -------------------|
+therapy_id | int  | ID of the therapy to be completed
+
+### Response
+Code | Meaning
+---------- | -------
+200| Success -- Therapy added successfully
+403| Error -- Invalid access token
+404| Error -- Therapy not found
 
 ## Add Appointment
 Adds an appointment to appointment model.
@@ -419,17 +528,166 @@ Adds an appointment to appointment model.
 Requires an authorization header.
 </aside>
 
-## Get Active Appointments
+>Example code
+
+```python
+appointment = {
+    'doctor': 'Mr. Md Doctor',
+    'institution': 'Rebro',
+    'date': str(datetime.now()),
+}
+requests.post('http://127.0.0.1:8000/user/add_appointment', json=appointment, headers=headers)
+```
+
+### HTTP Request
+
+`POST http://mobile-api.polypharm.solutions/user/add_appointment`
+
+### Request Body
+
+>Example body
+
+````json
+{
+    "doctor": "Mr. Md Doctor",
+    "institution": "Rebro",
+    "date": "2023-04-17 13:45:05.207232"
+}   
+````
+
+{
+    "doctor": "Mr. Md Doctor",
+    "institution": "Rebro",
+    "date": "2023-04-17 13:45:05.207232"
+}
+
+fields | type            | description
+------ |-----------------| -----------
+"doctor" | string          | Doctor name
+"institution" | string          | Institution name
+"date" | string          | Datetime timestmap
+
+### Response
+Code | Meaning
+---------- | -------
+200| Success -- Appointment added successfully
+403| Error -- Invalid access token
+
+## Active Appointments
 Get all active appointments.
 <aside class="notice">
 Requires an authorization header.
 </aside>
 
-## Finish Appointment
+>Example code
+
+```python
+requests.get('http://127.0.0.1:8000/user/active_appointments', headers=headers).json()
+```
+
+### HTTP Request
+
+`GET http://mobile-api.polypharm.solutions/user/active_appointments`
+
+### Returns
+
+> GET returns response body
+
+````json
+[
+  {
+    "institution": "Rebro",
+    "createdOn": "2023-04-17T13:30:40.141132",
+    "doctor": "Mr. Md Doctor",
+    "date": "2023-04-17T13:34:26.990152",
+    "isCompleted": 0,
+    "id": 1
+  }
+]
+````
+
+[
+  {UserAppointment},
+  {UserAppointment}
+]
+
+fields | type                            | description
+------ |---------------------------------| -----------
+/   | list of UserAppointment objects | 
+
+### UserAppointment object
+
+fields | type            | description
+------ |-----------------| -----------
+"id" | int             | UserAppointment ID
+"date" | DateTime string | Appointment date and time
+"createdOn" | DateTime string | /
+"doctor" | string          | Name of the doctor
+"institution" | string          | Name of the institution
+"isCompleted" | int             | Is it finished
+
+
+### Response
+Code | Meaning
+---------- | -------
+200| Success
+403| Error -- Invalid access token
+
+## Complete Appointment
 Finishes an appointment as completed or missed.
 <aside class="notice">
 Requires an authorization header.
 </aside>
+
+>Example code
+
+```python
+requests.get('http://127.0.0.1:8000/user/complete_appointment/1', headers=headers)
+```
+
+### HTTP Request
+
+`GET http://mobile-api.polypharm.solutions/user/complete_appointment/<appointment_id>`
+
+### Route parameters
+parameter | type | description        
+------ |------| -------------------|
+appointment_id | int  | ID of the appointment to be completed
+
+### Response
+Code | Meaning
+---------- | -------
+200| Success -- Appointment completed
+403| Error -- Invalid access token
+404| Error -- Appointment not found
+
+## Daily Wellbeing Rating
+Rates the daily wellbeing.
+<aside class="notice">
+Requires an authorization header.
+</aside>
+
+>Example code
+
+```python
+requests.get('http://127.0.0.1:8000/user/rate_wellbeing/5', headers=headers)
+```
+
+### HTTP Request
+
+`GET http://mobile-api.polypharm.solutions/user/rate_wellbeing/<int:rating>`
+
+### Route parameters
+
+parameter | type | description        
+------ |------| -------------------|
+rating | int  | Daily wellbeing rating
+
+### Response
+Code | Meaning
+---------- | -------
+200| Success -- Appointment added successfully
+403| Error -- Invalid access token
 
 # Polypharm
 Functionalities that are related to personalized medicine selection and/or evaluation.
@@ -589,7 +847,7 @@ response = requests.get('http://127.0.0.1:8000/polypharm/ingredient/1691')
 
 `GET http://mobile-api.polypharm.solutions/polypharm/ingredient/<id>`
 
-### Route parameter
+### Route parameters
 
 parameter | type | description        
 ------ |------| -------------------|
