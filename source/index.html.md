@@ -9,7 +9,7 @@ toc_footers:
   - <a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a>
 
 includes:
-  - errors
+#  - errors
 
 search: true
 
@@ -17,20 +17,20 @@ code_clipboard: true
 
 meta:
   - name: description
-    content: Documentation for the Kittn API
+    content: Documentation for the Polypharm mobile API
 ---
 
 # Introduction
 
 Welcome to PolypharmSolutions Mobile API Documentations. API is intended for use in PolypharmSolutions mobile application.
-The API is a work in progress.
+The API is work in progress.
 
 This API documentation page was created with [Slate](https://github.com/slatedocs/slate).
 
 # Authentication
 
-API uses user keys to enable authentication. Routes are only accessible by users (disabled for development).
-Provide authorization header for each API request.
+API uses user keys to enable authentication. Routes are only valid when used with an authorization header.
+Provide authorization header for each API request. The authorization key is recieved by logging in.
 
 `Authorization: kg94385kgdsfj`
 
@@ -347,7 +347,7 @@ Requires an authorization header.
 
 `POST http://mobile-api.polypharm.solutions/user/add_therapy`
 
-## Request Body
+### Request Body
 
 >Example body
 
@@ -738,13 +738,170 @@ Code | Meaning
 400| Error -- PolypharmData API error
 
 ## Analyze regimen
-Analyzes current user's regimen
+Analyzes current user's active therapeutic regimen.
 <aside class="notice">
 Requires an authorization header.
 </aside>
 
+### HTTP Request
+
+>Example code
+
+```python
+response = requests.get('http://127.0.0.1:8000/polypharm/analyze_regimen', headers=headers)
+```
+
+`GET http://mobile-api.polypharm.solutions/polypharm/analyze_regimen`
+
+### Returns
+
+> GET returns response body
+
+````json
+{
+  "contraindications": [
+    {"condition": "Drug Hypersensitivity", "drug": 363},
+    {"condition": "Hyperaldosteronism", "drug": 363},
+    {"condition": "Hypotension", "drug": 363},
+    {"condition": "Pregnancy", "drug": 363},
+    {"condition": "Asthma", "drug": 1691},
+    {"condition": "Drug Hypersensitivity", "drug": 1691},
+    {"condition": "Pregnancy Trimester, Third", "drug": 1691},
+    {"condition": "Pregnancy, Abdominal", "drug": 1691},
+    {"condition": "Rhinitis", "drug": 1691},
+    {"condition": "Bronchial Hyperreactivity", "drug": 1691},
+    {"condition": "Drug Hypersensitivity", "drug": 3220},
+    {"condition": "Lactation", "drug": 3220},
+    {"condition": "Liver Diseases", "drug": 3220},
+    {"condition": "Pregnancy", "drug": 3220},
+    {"condition": "Liver Failure", "drug": 3220}],
+  "interactionAde": [
+    {
+      "condition_concept_name": "Hypertensive emergency",
+      "drug_1_id": 363,
+      "drug_2_id": 3220,
+      "significance": 3.345304142782046
+    },
+    {
+      "condition_concept_name": "Colitis microscopic",
+      "drug_1_id": 1691,
+      "drug_2_id": 3220,
+      "significance": 3.204154230157523},
+    {
+      "condition_concept_name": "Diabetic neuropathy",
+      "drug_1_id": 1691,
+      "drug_2_id": 3220,
+      "significance": 2.661118035930371
+    },
+    {
+      "condition_concept_name": "Spinal osteoarthritis",
+      "drug_1_id": 363,
+      "drug_2_id": 1691,
+      "significance": 2.550854985988092
+    },
+    {
+      "condition_concept_name": "Neutrophilic dermatosis",
+      "drug_1_id": 363,
+      "drug_2_id": 3220,
+      "significance": 2.549737785988092
+    }
+  ],
+  "interactionCount": 3,
+  "interactions": [
+    {
+      "description": "The metabolism of Atorvastatin can be decreased when combined with Losartan.",
+      "drug_1_id": 363,
+      "drug_2_id": 3220,
+      "id": 842954,
+      "source": "Drugbank"
+    },
+    {
+      "description": "The risk or severity of renal failure, hyperkalemia, and hypertension can be increased when Losartan is combined with Ibuprofen.",
+      "drug_1_id": 363,
+      "drug_2_id": 1691,
+      "id": 843044,
+      "source": "Drugbank"
+    },
+    {
+      "description": "The metabolism of Atorvastatin can be decreased when combined with Ibuprofen.",
+      "drug_1_id": 1691,
+      "drug_2_id": 3220,
+      "id": 1259755,
+      "source": "Drugbank"
+    }],
+  
+  "isGenderRisk": 1,
+  "isPriorityInteraction": 0,
+  "pharmacogenomics": [
+    {
+      "action": "Informative PGx",
+      "drug": 3220,
+      "gene": "SLCO1B1",
+      "guideline": "https://cpicpgx.org/guidelines/cpic-guideline-for-statins/"
+    },
+    {
+      "action": "Informative PGx",
+      "drug": 3220,
+      "gene": "LDLR",
+      "guideline": None
+    }
+  ]
+}
+````
+
+fields | type   | description
+------ |--------| -----------
+"contraindications" | object | Corresponds to user's condition field
+"interactionAde" | object | Some possible side effects from interactions
+"isGenderRisk" | int    | Is risk gender stratisfied
+"isPriorityInteraction" | int    | If it's priority it mustn't be prescribed
+"pharmacogenomics" | object | Pharmacogenomics of the drugs
+"interactionCount" | int    | How many interactions are in th etherapy
+"interactions" | object | The interactions
+
+
+### contraindications object
+fields | type   | description
+------ |--------| -----------
+"condition" | string | Corresponds to user's condition field
+"drug" | int    | Ingredient ID
+
+### interactionAde object
+fields | type   | description
+------ |--------| -----------
+"condition_concept_name" | string | Condition
+"drug_1_id" | int    | Ingredient ID
+"drug_2_id" | int    | Ingredient ID
+
+### pharmacogenomics object
+fields | type   | description
+------ |--------| -----------
+"action" | string | Importance of the gene drug interaction
+"drug" | int    | Ingredient ID
+"gene" | string | Gene name
+"guideline" | string | Url for action to be taken
+
+
+### interactions object
+fields | type   | description
+------ |--------| -----------
+"description" | string | Condition
+"drug_1_id" | int    | Ingredient ID
+"drug_2_id" | int    | Ingredient ID
+"id" | int    | Interaction id
+"source" | string | source database
+
+### Response
+Code | Meaning
+---------- | -------
+200| Success
+400| Error -- PolypharmData API error
+403| Error -- Invalid access token
+
 ## Scan drug
-Evaluates how an addition of a new drug would influence patient's current regimen
+Evaluates how an addition of a new drug would influence patient's current regimen. It is different from analyze 
+is that it returns only the interactions which are between the new drug and the rest of the regimen. It is complementary
+to analyze regimen.
 <aside class="notice">
 Requires an authorization header.
 </aside>
