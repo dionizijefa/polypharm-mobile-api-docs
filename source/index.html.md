@@ -486,7 +486,7 @@ Searches a user input string to find a product or an active ingredient
 response = requests.get('http://127.0.0.1:8000/polypharm/find_drug?string=iburpforen')
 ```
 
-`GET http://mobile-api.polypharm.solutions/polypharm/find_drug`
+`GET http://mobile-api.polypharm.solutions/polypharm/find_drug?string=<param>`
 
 ### Query parameters
 
@@ -905,3 +905,136 @@ to analyze regimen.
 <aside class="notice">
 Requires an authorization header.
 </aside>
+
+### HTTP Request
+
+>Example code
+
+```python
+response = requests.get('http://127.0.0.1:8000/polypharm/scan_drug?drug_id=1623', headers=headers)
+```
+
+`GET http://mobile-api.polypharm.solutions/polypharm/scan_drug?drug_id=<param>`
+
+### Returns
+
+> GET returns response body
+
+````json
+{
+  "contraindications": 
+    [
+      {"condition": "Drug Hypersensitivity", "drug": 1623},
+      {"condition": "Hepatic Insufficiency", "drug": 1623}
+    ],
+  "id": 1623,
+  "interactionAde": 
+    [
+      {
+        "condition_concept_name": "Rash maculo-papular",
+        "drug_1_id": 1623,
+        "drug_2_id": 3220,
+        "id": 1567391,
+        "significance": 1.993282941489413},
+      {
+        "condition_concept_name": "Toxic epidermal necrolysis",
+        "drug_1_id": 1623,
+        "drug_2_id": 3220,
+        "id": 1567385,
+        "significance": 1.9483149092103744},
+      {
+        "condition_concept_name": "Pulmonary embolism",
+        "drug_1_id": 1623,
+        "drug_2_id": 363,
+        "id": 601378,
+        "significance": 1.8017106054281464},
+      {
+        "condition_concept_name": "Pyrexia",
+        "drug_1_id": 1623,
+        "drug_2_id": 1691,
+        "id": 2201497,
+        "significance": 1.691559012994046
+      },
+      {
+        "condition_concept_name": "Drug interaction",
+        "drug_1_id": 1623,
+        "drug_2_id": 3220,
+        "id": 1567380,
+        "significance": 1.6473726786064953
+      }
+    ],
+  "interactionCount": 1,
+  "interactions": 
+    [
+      {
+        "description": "Ibuprofen may decrease the excretion rate of Abacavir which could result in a higher serum level.",
+        "drug_1_id": 1623,
+        "drug_2_id": 1691,
+        "id": 1256519,
+        "source": "Drugbank"
+      }
+    ],
+  "isGenderRisk": 1,
+  "isPriorityInteraction": 0,
+  "name": "abacavir",
+  "pharmacogenomics": 
+    [
+      {
+        "action": "Testing required",
+        "drug": 1623,
+        "gene": "HLA-B",
+        "guideline": "https://cpicpgx.org/guidelines/guideline-for-abacavir-and-hla-b/"
+      }
+    ]
+}
+````
+
+fields | type   | description
+------ |--------| -----------
+"id" | int    | Ingredient ID
+"contraindications" | object | Corresponds to user's condition field
+"interactionAde" | object | Some possible side effects from interactions
+"isGenderRisk" | int    | Is risk gender stratisfied
+"isPriorityInteraction" | int    | If it's priority it mustn't be prescribed
+"pharmacogenomics" | object | Pharmacogenomics of the drugs
+"interactionCount" | int    | How many interactions are in th etherapy
+"interactions" | object | The interactions
+
+
+### contraindications object
+fields | type   | description
+------ |--------| -----------
+"condition" | string | Corresponds to user's condition field
+"drug" | int    | Ingredient ID
+
+### interactionAde object
+fields | type   | description
+------ |--------| -----------
+"condition_concept_name" | string | Condition
+"drug_1_id" | int    | Ingredient ID
+"drug_2_id" | int    | Ingredient ID
+
+### pharmacogenomics object
+fields | type   | description
+------ |--------| -----------
+"action" | string | Importance of the gene drug interaction
+"drug" | int    | Ingredient ID
+"gene" | string | Gene name
+"guideline" | string | Url for action to be taken
+
+
+### interactions object
+fields | type   | description
+------ |--------| -----------
+"description" | string | Condition
+"drug_1_id" | int    | Ingredient ID
+"drug_2_id" | int    | Ingredient ID
+"id" | int    | Interaction id
+"source" | string | source database
+
+### Response
+Code | Meaning
+---------- | -------
+200| Success
+400| Error -- PolypharmData API error
+403| Error -- Invalid access token
