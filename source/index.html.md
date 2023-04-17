@@ -435,6 +435,45 @@ Requires an authorization header.
 Functionalities that are related to personalized medicine selection and/or evaluation.
 
 ## Get Conditions
+Returns a list of all conditions that a user can input.
+
+### HTTP Request
+
+>Example code
+
+```python
+response = requests.get('http://127.0.0.1:8000/polypharm/conditions')
+```
+
+`GET http://mobile-api.polypharm.solutions/polypharm/conditions`
+
+### Returns
+
+> GET returns response body
+
+````json
+[
+  "Hyponatremia",
+  "Hypocalcemica",
+  "Xeroderma Pigmentosum"
+]
+````
+
+[
+  "Hyponatremia",
+  "Hypocalcemica",
+  "Xeroderma Pigmentosum",
+  ...
+]
+
+### Response
+Code | Meaning
+---------- | -------
+200| Success
+400| Error -- PolypharmData API error
+
+
+
 
 ## Find drug
 Searches a user input string to find a product or an active ingredient
