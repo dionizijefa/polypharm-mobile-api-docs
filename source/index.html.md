@@ -51,7 +51,7 @@ response = requests.post('https://polypharm-mobile-api.v9dikv5unmbh4.eu-central-
 ```
 
 
-`POST http://mobile-api.polypharm.solutions/auth/register`
+`POST https://polypharm-mobile-api.v9dikv5unmbh4.eu-central-1.cs.amazonlightsail.com/auth/register`
 
 ### Request Body
 
@@ -135,7 +135,7 @@ response = requests.post('https://polypharm-mobile-api.v9dikv5unmbh4.eu-central-
 ```
 
 
-`POST http://mobile-api.polypharm.solutions/auth/login`
+`POST https://polypharm-mobile-api.v9dikv5unmbh4.eu-central-1.cs.amazonlightsail.com/auth/login`
 
 ### Body
 
@@ -205,7 +205,7 @@ headers = {'Authorization': "kg94385kgdsfj"}
 response = requests.get('https://polypharm-mobile-api.v9dikv5unmbh4.eu-central-1.cs.amazonlightsail.com/user/me', headers=header)
 ```
 
-`GET http://mobile-api.polypharm.solutions/user/me`
+`GET https://polypharm-mobile-api.v9dikv5unmbh4.eu-central-1.cs.amazonlightsail.com/user/me`
 
 ### Returns
 
@@ -290,7 +290,7 @@ body = {'conditions': ['Headache', 'Stomach pain']}
 response = requests.get('https://polypharm-mobile-api.v9dikv5unmbh4.eu-central-1.cs.amazonlightsail.com/user/conditions', headers=header, body=body)
 ```
 
-`GET http://mobile-api.polypharm.solutions/user/conditions`
+`GET https://polypharm-mobile-api.v9dikv5unmbh4.eu-central-1.cs.amazonlightsail.com/user/conditions`
 
 ### Request Body
 
@@ -347,7 +347,7 @@ Requires an authorization header.
 
 ### HTTP Request
 
-`POST http://mobile-api.polypharm.solutions/user/add_therapy`
+`POST https://polypharm-mobile-api.v9dikv5unmbh4.eu-central-1.cs.amazonlightsail.com/user/add_therapy`
 
 ### Request Body
 
@@ -417,7 +417,7 @@ requests.get('https://polypharm-mobile-api.v9dikv5unmbh4.eu-central-1.cs.amazonl
 
 ### HTTP Request
 
-`GET http://mobile-api.polypharm.solutions/user/active_therapies`
+`GET https://polypharm-mobile-api.v9dikv5unmbh4.eu-central-1.cs.amazonlightsail.com/user/active_therapies`
 
 ### Returns
 
@@ -510,7 +510,7 @@ requests.get('https://polypharm-mobile-api.v9dikv5unmbh4.eu-central-1.cs.amazonl
 
 ### HTTP Request
 
-`GET http://mobile-api.polypharm.solutions/user/complete_therapy/<therapy_id>`
+`GET https://polypharm-mobile-api.v9dikv5unmbh4.eu-central-1.cs.amazonlightsail.com/user/complete_therapy/<therapy_id>`
 
 ### Route parameters
 parameter | type | description        
@@ -543,7 +543,7 @@ requests.post('https://polypharm-mobile-api.v9dikv5unmbh4.eu-central-1.cs.amazon
 
 ### HTTP Request
 
-`POST http://mobile-api.polypharm.solutions/user/add_appointment`
+`POST https://polypharm-mobile-api.v9dikv5unmbh4.eu-central-1.cs.amazonlightsail.com/user/add_appointment`
 
 ### Request Body
 
@@ -589,7 +589,7 @@ requests.get('https://polypharm-mobile-api.v9dikv5unmbh4.eu-central-1.cs.amazonl
 
 ### HTTP Request
 
-`GET http://mobile-api.polypharm.solutions/user/active_appointments`
+`GET https://polypharm-mobile-api.v9dikv5unmbh4.eu-central-1.cs.amazonlightsail.com/user/active_appointments`
 
 ### Returns
 
@@ -649,7 +649,7 @@ requests.get('https://polypharm-mobile-api.v9dikv5unmbh4.eu-central-1.cs.amazonl
 
 ### HTTP Request
 
-`GET http://mobile-api.polypharm.solutions/user/complete_appointment/<appointment_id>`
+`GET https://polypharm-mobile-api.v9dikv5unmbh4.eu-central-1.cs.amazonlightsail.com/user/complete_appointment/<appointment_id>`
 
 ### Route parameters
 parameter | type | description        
@@ -677,7 +677,7 @@ requests.get('https://polypharm-mobile-api.v9dikv5unmbh4.eu-central-1.cs.amazonl
 
 ### HTTP Request
 
-`GET http://mobile-api.polypharm.solutions/user/rate_wellbeing/<rating>`
+`GET https://polypharm-mobile-api.v9dikv5unmbh4.eu-central-1.cs.amazonlightsail.com/user/rate_wellbeing/<rating>`
 
 ### Route parameters
 
@@ -707,7 +707,7 @@ requests.get('https://polypharm-mobile-api.v9dikv5unmbh4.eu-central-1.cs.amazonl
 
 ### HTTP Request
 
-`GET http://mobile-api.polypharm.solutions/user/add_test_user`
+`GET https://polypharm-mobile-api.v9dikv5unmbh4.eu-central-1.cs.amazonlightsail.com/user/add_test_user`
 
 ### Response
 200| Success -- Test user added successfully
@@ -727,7 +727,7 @@ Returns a list of all conditions that a user can input.
 response = requests.get('https://polypharm-mobile-api.v9dikv5unmbh4.eu-central-1.cs.amazonlightsail.com/polypharm/conditions')
 ```
 
-`GET http://mobile-api.polypharm.solutions/polypharm/conditions`
+`GET https://polypharm-mobile-api.v9dikv5unmbh4.eu-central-1.cs.amazonlightsail.com/polypharm/conditions`
 
 ### Returns
 
@@ -768,7 +768,7 @@ Searches a user input string to find a product or an active ingredient
 response = requests.get('https://polypharm-mobile-api.v9dikv5unmbh4.eu-central-1.cs.amazonlightsail.com/polypharm/find_drug?string=iburpforen')
 ```
 
-`GET http://mobile-api.polypharm.solutions/polypharm/find_drug?string=<param>`
+`GET https://polypharm-mobile-api.v9dikv5unmbh4.eu-central-1.cs.amazonlightsail.com/polypharm/find_drug?string=<param>`
 
 ### Query parameters
 
@@ -869,7 +869,7 @@ Returns an ingredient model from an ingredient ID
 response = requests.get('https://polypharm-mobile-api.v9dikv5unmbh4.eu-central-1.cs.amazonlightsail.com/polypharm/ingredient/1691')
 ```
 
-`GET http://mobile-api.polypharm.solutions/polypharm/ingredient/<id>`
+`GET https://polypharm-mobile-api.v9dikv5unmbh4.eu-central-1.cs.amazonlightsail.com/polypharm/ingredient/<id>`
 
 ### Route parameters
 
@@ -956,7 +956,7 @@ Returns a product model from a product ID
 response = requests.get('https://polypharm-mobile-api.v9dikv5unmbh4.eu-central-1.cs.amazonlightsail.com/polypharm/product/2554')
 ```
 
-`GET http://mobile-api.polypharm.solutions/polypharm/product/<id>`
+`GET https://polypharm-mobile-api.v9dikv5unmbh4.eu-central-1.cs.amazonlightsail.com/polypharm/product/<id>`
 
 ### Route parameter
 
@@ -1033,7 +1033,7 @@ Requires an authorization header.
 response = requests.get('https://polypharm-mobile-api.v9dikv5unmbh4.eu-central-1.cs.amazonlightsail.com/polypharm/analyze_regimen', headers=headers)
 ```
 
-`GET http://mobile-api.polypharm.solutions/polypharm/analyze_regimen`
+`GET https://polypharm-mobile-api.v9dikv5unmbh4.eu-central-1.cs.amazonlightsail.com/polypharm/analyze_regimen`
 
 ### Returns
 
@@ -1196,7 +1196,7 @@ Requires an authorization header.
 response = requests.get('https://polypharm-mobile-api.v9dikv5unmbh4.eu-central-1.cs.amazonlightsail.com/polypharm/scan_drug?drug_id=1623', headers=headers)
 ```
 
-`GET http://mobile-api.polypharm.solutions/polypharm/scan_drug?drug_id=<param>`
+`GET https://polypharm-mobile-api.v9dikv5unmbh4.eu-central-1.cs.amazonlightsail.com/polypharm/scan_drug?drug_id=<param>`
 
 ### Query parameters
 
