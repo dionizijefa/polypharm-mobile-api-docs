@@ -371,6 +371,9 @@
                     <a href="#conditions" class="toc-h2 toc-link" data-title="Conditions">Conditions</a>
                   </li>
                   <li>
+                    <a href="#units" class="toc-h2 toc-link" data-title="Units">Units</a>
+                  </li>
+                  <li>
                     <a href="#find-drug" class="toc-h2 toc-link" data-title="Find drug">Find drug</a>
                   </li>
                   <li>
@@ -1661,9 +1664,50 @@ Requires an authorization header.
 <td>Error -- PolypharmData API error</td>
 </tr>
 </tbody></table>
+<h2 id='units'>Units</h2>
+<p>Returns a list of all measurement units that can be used for drugs.</p>
+<h3 id='http-request-15'>HTTP Request</h3>
+<blockquote>
+<p>Example code</p>
+</blockquote>
+<div class="highlight"><pre class="highlight python tab-python"><code><span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://polypharm-mobile-api.v9dikv5unmbh4.eu-central-1.cs.amazonlightsail.com/polypharm/units'</span><span class="p">)</span>
+</code></pre></div>
+<p><code>GET https://polypharm-mobile-api.v9dikv5unmbh4.eu-central-1.cs.amazonlightsail.com/polypharm/units</code></p>
+<h3 id='returns-6'>Returns</h3>
+<blockquote>
+<p>GET returns response body</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="s2">"mg"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"mL"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"g"</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<p>[
+  &quot;mg&quot;,
+  &quot;mL&quot;,
+  &quot;g&quot;,
+  ...
+]</p>
+<h3 id='response-15'>Response</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td>Success</td>
+</tr>
+<tr>
+<td>400</td>
+<td>Error -- PolypharmData API error</td>
+</tr>
+</tbody></table>
 <h2 id='find-drug'>Find drug</h2>
 <p>Searches a user input string to find a product or an active ingredient</p>
-<h3 id='http-request-15'>HTTP Request</h3>
+<h3 id='http-request-16'>HTTP Request</h3>
 <blockquote>
 <p>Example code</p>
 </blockquote>
@@ -1684,7 +1728,7 @@ Requires an authorization header.
 <td>Whatever you&#39;re looking for</td>
 </tr>
 </tbody></table>
-<h3 id='returns-6'>Returns</h3>
+<h3 id='returns-7'>Returns</h3>
 <blockquote>
 <p>GET returns response body</p>
 </blockquote>
@@ -1799,7 +1843,7 @@ Requires an authorization header.
 <td>How is it measured, e.g. in mg</td>
 </tr>
 </tbody></table>
-<h3 id='response-15'>Response</h3>
+<h3 id='response-16'>Response</h3>
 <table><thead>
 <tr>
 <th>Code</th>
@@ -1821,7 +1865,7 @@ Requires an authorization header.
 </tbody></table>
 <h2 id='ingredient-2'>Ingredient</h2>
 <p>Returns an ingredient model from an ingredient ID</p>
-<h3 id='http-request-16'>HTTP Request</h3>
+<h3 id='http-request-17'>HTTP Request</h3>
 <blockquote>
 <p>Example code</p>
 </blockquote>
@@ -1842,7 +1886,7 @@ Requires an authorization header.
 <td>ID of the ingredient</td>
 </tr>
 </tbody></table>
-<h3 id='returns-7'>Returns</h3>
+<h3 id='returns-8'>Returns</h3>
 <blockquote>
 <p>GET returns response body</p>
 </blockquote>
@@ -1950,7 +1994,7 @@ Requires an authorization header.
 <td>List of conditions (strings) which medicine can treat</td>
 </tr>
 </tbody></table>
-<h3 id='response-16'>Response</h3>
+<h3 id='response-17'>Response</h3>
 <table><thead>
 <tr>
 <th>Code</th>
@@ -1972,7 +2016,7 @@ Requires an authorization header.
 </tbody></table>
 <h2 id='product-2'>Product</h2>
 <p>Returns a product model from a product ID</p>
-<h3 id='http-request-17'>HTTP Request</h3>
+<h3 id='http-request-18'>HTTP Request</h3>
 <blockquote>
 <p>Example code</p>
 </blockquote>
@@ -1993,7 +2037,7 @@ Requires an authorization header.
 <td>ID of the product</td>
 </tr>
 </tbody></table>
-<h3 id='returns-8'>Returns</h3>
+<h3 id='returns-9'>Returns</h3>
 <blockquote>
 <p>GET returns response body</p>
 </blockquote>
@@ -2088,7 +2132,7 @@ Requires an authorization header.
 <td>What is the unit, e.g. in mg</td>
 </tr>
 </tbody></table>
-<h3 id='response-17'>Response</h3>
+<h3 id='response-18'>Response</h3>
 <table><thead>
 <tr>
 <th>Code</th>
@@ -2113,14 +2157,14 @@ Requires an authorization header.
 <aside class="notice">
 Requires an authorization header.
 </aside></p>
-<h3 id='http-request-18'>HTTP Request</h3>
+<h3 id='http-request-19'>HTTP Request</h3>
 <blockquote>
 <p>Example code</p>
 </blockquote>
 <div class="highlight"><pre class="highlight python tab-python"><code><span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://polypharm-mobile-api.v9dikv5unmbh4.eu-central-1.cs.amazonlightsail.com/polypharm/analyze_regimen'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
 </code></pre></div>
 <p><code>GET https://polypharm-mobile-api.v9dikv5unmbh4.eu-central-1.cs.amazonlightsail.com/polypharm/analyze_regimen</code></p>
-<h3 id='returns-9'>Returns</h3>
+<h3 id='returns-10'>Returns</h3>
 <blockquote>
 <p>GET returns response body</p>
 </blockquote>
@@ -2363,7 +2407,7 @@ Requires an authorization header.
 <td>source database</td>
 </tr>
 </tbody></table>
-<h3 id='response-18'>Response</h3>
+<h3 id='response-19'>Response</h3>
 <table><thead>
 <tr>
 <th>Code</th>
@@ -2390,7 +2434,7 @@ to analyze regimen.
 <aside class="notice">
 Requires an authorization header.
 </aside></p>
-<h3 id='http-request-19'>HTTP Request</h3>
+<h3 id='http-request-20'>HTTP Request</h3>
 <blockquote>
 <p>Example code</p>
 </blockquote>
@@ -2411,7 +2455,7 @@ Requires an authorization header.
 <td>Ingredient ID of a scanned drug</td>
 </tr>
 </tbody></table>
-<h3 id='returns-10'>Returns</h3>
+<h3 id='returns-11'>Returns</h3>
 <blockquote>
 <p>GET returns response body</p>
 </blockquote>
@@ -2636,7 +2680,7 @@ Requires an authorization header.
 <td>source database</td>
 </tr>
 </tbody></table>
-<h3 id='response-19'>Response</h3>
+<h3 id='response-20'>Response</h3>
 <table><thead>
 <tr>
 <th>Code</th>
