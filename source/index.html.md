@@ -845,6 +845,43 @@ Code | Meaning
 400| Error -- PolypharmData API error
 
 
+## Units
+Returns a list of all measurement units that can be used for drugs.
+
+### HTTP Request
+
+>Example code
+
+```python
+response = requests.get('https://polypharm-mobile-api.v9dikv5unmbh4.eu-central-1.cs.amazonlightsail.com/polypharm/units')
+```
+
+`GET https://polypharm-mobile-api.v9dikv5unmbh4.eu-central-1.cs.amazonlightsail.com/polypharm/units`
+
+### Returns
+
+> GET returns response body
+
+````json
+[
+  "mg",
+  "mL",
+  "g"
+]
+````
+
+[
+  "mg",
+  "mL",
+  "g",
+  ...
+]
+
+### Response
+Code | Meaning
+---------- | -------
+200| Success
+400| Error -- PolypharmData API error
 
 
 ## Find drug
