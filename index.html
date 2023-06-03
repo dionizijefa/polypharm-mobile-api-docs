@@ -1026,11 +1026,11 @@ Requires an authorization header.
     </span><span class="nl">"frequency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"daily"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"duration"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
     </span><span class="nl">"treats"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Headache"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"startDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-04-16 23:41:11.683103"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"endDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-04-16 23:41:11.683103"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"startDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-04-16"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"endDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-04-16"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"timeOfDay"</span><span class="p">:</span><span class="w"> </span><span class="s2">"14:30:00"</span><span class="w">
 </span><span class="p">}</span><span class="w">   
-</span></code></pre></div>
+</span></code></pre></div><h3 id='usertherapy-object'>UserTherapy object</h3>
 <p>{
     &quot;drugId&quot;: int,
     &quot;productId&quot;: int,
@@ -1094,12 +1094,12 @@ Requires an authorization header.
 </tr>
 <tr>
 <td>&quot;startDate&quot;</td>
-<td>DateTime string</td>
+<td>Date string</td>
 <td>/</td>
 </tr>
 <tr>
 <td>&quot;endDate&quot;</td>
-<td>DateTime string</td>
+<td>Date string</td>
 <td>/</td>
 </tr>
 <tr>
@@ -1108,7 +1108,29 @@ Requires an authorization header.
 <td>When to take</td>
 </tr>
 </tbody></table>
-<h3 id='response-6'>Response</h3>
+<h3 id='returns-3'>Returns</h3>
+<p>Returns added UserTherapy object</p>
+
+<blockquote>
+<p>Returns added UserTherapy object</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"dose"</span><span class="p">:</span><span class="w"> </span><span class="mf">800.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mf">3.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"productId"</span><span class="p">:</span><span class="w"> </span><span class="mi">884</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"treats"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Headache"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"frequency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"daily"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"startDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-04-17"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"createdOn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-04-17"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"endDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-04-17"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"isCompleted"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"duration"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mg"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"timeOfDay"</span><span class="p">:</span><span class="w"> </span><span class="s2">"14:30:00"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"drugId"</span><span class="p">:</span><span class="w"> </span><span class="mi">363</span><span class="w">
+ </span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='response-6'>Response</h3>
 <table><thead>
 <tr>
 <th>Code</th>
@@ -1136,7 +1158,7 @@ Requires an authorization header.
 <div class="highlight"><pre class="highlight python tab-python"><code><span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://polypharm-mobile-api.v9dikv5unmbh4.eu-central-1.cs.amazonlightsail.com/user/active_therapies'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">).</span><span class="n">json</span><span class="p">()</span>
 </code></pre></div><h3 id='http-request-7'>HTTP Request</h3>
 <p><code>GET https://polypharm-mobile-api.v9dikv5unmbh4.eu-central-1.cs.amazonlightsail.com/user/active_therapies</code></p>
-<h3 id='returns-3'>Returns</h3>
+<h3 id='returns-4'>Returns</h3>
 <blockquote>
 <p>GET returns response body</p>
 </blockquote>
@@ -1193,7 +1215,7 @@ Requires an authorization header.
 <td></td>
 </tr>
 </tbody></table>
-<h3 id='usertherapy-object'>UserTherapy object</h3>
+<h3 id='usertherapy-object-2'>UserTherapy object</h3>
 <table><thead>
 <tr>
 <th>fields</th>
@@ -1418,7 +1440,7 @@ Requires an authorization header.
 <div class="highlight"><pre class="highlight python tab-python"><code><span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://polypharm-mobile-api.v9dikv5unmbh4.eu-central-1.cs.amazonlightsail.com/user/active_appointments'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">).</span><span class="n">json</span><span class="p">()</span>
 </code></pre></div><h3 id='http-request-10'>HTTP Request</h3>
 <p><code>GET https://polypharm-mobile-api.v9dikv5unmbh4.eu-central-1.cs.amazonlightsail.com/user/active_appointments</code></p>
-<h3 id='returns-4'>Returns</h3>
+<h3 id='returns-5'>Returns</h3>
 <blockquote>
 <p>GET returns response body</p>
 </blockquote>
@@ -1632,7 +1654,7 @@ Requires an authorization header.
 <div class="highlight"><pre class="highlight python tab-python"><code><span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://polypharm-mobile-api.v9dikv5unmbh4.eu-central-1.cs.amazonlightsail.com/polypharm/conditions'</span><span class="p">)</span>
 </code></pre></div>
 <p><code>GET https://polypharm-mobile-api.v9dikv5unmbh4.eu-central-1.cs.amazonlightsail.com/polypharm/conditions</code></p>
-<h3 id='returns-5'>Returns</h3>
+<h3 id='returns-6'>Returns</h3>
 <blockquote>
 <p>GET returns response body</p>
 </blockquote>
@@ -1673,7 +1695,7 @@ Requires an authorization header.
 <div class="highlight"><pre class="highlight python tab-python"><code><span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://polypharm-mobile-api.v9dikv5unmbh4.eu-central-1.cs.amazonlightsail.com/polypharm/units'</span><span class="p">)</span>
 </code></pre></div>
 <p><code>GET https://polypharm-mobile-api.v9dikv5unmbh4.eu-central-1.cs.amazonlightsail.com/polypharm/units</code></p>
-<h3 id='returns-6'>Returns</h3>
+<h3 id='returns-7'>Returns</h3>
 <blockquote>
 <p>GET returns response body</p>
 </blockquote>
@@ -1728,7 +1750,7 @@ Requires an authorization header.
 <td>Whatever you&#39;re looking for</td>
 </tr>
 </tbody></table>
-<h3 id='returns-7'>Returns</h3>
+<h3 id='returns-8'>Returns</h3>
 <blockquote>
 <p>GET returns response body</p>
 </blockquote>
@@ -1886,7 +1908,7 @@ Requires an authorization header.
 <td>ID of the ingredient</td>
 </tr>
 </tbody></table>
-<h3 id='returns-8'>Returns</h3>
+<h3 id='returns-9'>Returns</h3>
 <blockquote>
 <p>GET returns response body</p>
 </blockquote>
@@ -2037,7 +2059,7 @@ Requires an authorization header.
 <td>ID of the product</td>
 </tr>
 </tbody></table>
-<h3 id='returns-9'>Returns</h3>
+<h3 id='returns-10'>Returns</h3>
 <blockquote>
 <p>GET returns response body</p>
 </blockquote>
@@ -2164,7 +2186,7 @@ Requires an authorization header.
 <div class="highlight"><pre class="highlight python tab-python"><code><span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://polypharm-mobile-api.v9dikv5unmbh4.eu-central-1.cs.amazonlightsail.com/polypharm/analyze_regimen'</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
 </code></pre></div>
 <p><code>GET https://polypharm-mobile-api.v9dikv5unmbh4.eu-central-1.cs.amazonlightsail.com/polypharm/analyze_regimen</code></p>
-<h3 id='returns-10'>Returns</h3>
+<h3 id='returns-11'>Returns</h3>
 <blockquote>
 <p>GET returns response body</p>
 </blockquote>
@@ -2455,7 +2477,7 @@ Requires an authorization header.
 <td>Ingredient ID of a scanned drug</td>
 </tr>
 </tbody></table>
-<h3 id='returns-11'>Returns</h3>
+<h3 id='returns-12'>Returns</h3>
 <blockquote>
 <p>GET returns response body</p>
 </blockquote>
