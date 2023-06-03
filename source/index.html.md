@@ -453,12 +453,12 @@ Requires an authorization header.
     "frequency": "daily",
     "duration": 10,
     "treats": "Headache",
-    "startDate": "2023-04-16 23:41:11.683103",
-    "endDate": "2023-04-16 23:41:11.683103",
+    "startDate": "2023-04-16",
+    "endDate": "2023-04-16",
     "timeOfDay": "14:30:00"
 }   
 ````
-
+### UserTherapy object
 {
     "drugId": int,
     "productId": int,
@@ -473,21 +473,45 @@ Requires an authorization header.
     "timeOfDay": Time string
 }
 
-fields | type            | description
------- |-----------------| -----------
-"drugId" | int             | Ingredient ID
-"productId" | int             | Product ID
-"dose" | float           | How strong is the medicine, e.g. 30mg
-"unit" | string          | How is it measured
-"quantity" | int             | How many to take each time
-"frequency" | string          | How often to take
-"duration" | int             | How many days is the therapy
-"treats" | string          | What is it for
-"startDate" | DateTime string | /
-"endDate" | DateTime string | /
-"timeOfDay" | Time string     | When to take
+fields | type        | description
+------ |-------------| -----------
+"drugId" | int         | Ingredient ID
+"productId" | int         | Product ID
+"dose" | float       | How strong is the medicine, e.g. 30mg
+"unit" | string      | How is it measured
+"quantity" | int         | How many to take each time
+"frequency" | string      | How often to take
+"duration" | int         | How many days is the therapy
+"treats" | string      | What is it for
+"startDate" | Date string | /
+"endDate" | Date string | /
+"timeOfDay" | Time string | When to take
 
+### Returns
+Returns added UserTherapy object
+
+> Returns added UserTherapy object
+
+````json
+ {
+    "dose": 800.0,
+    "quantity": 3.0,
+    "productId": 884,
+    "treats": "Headache",
+    "frequency": "daily",
+    "startDate": "2023-04-17",
+    "createdOn": "2023-04-17",
+    "endDate": "2023-04-17",
+    "isCompleted": 0,
+    "duration": 10,
+    "unit": "mg",
+    "timeOfDay": "14:30:00",
+    "id": 2,
+    "drugId": 363
+ }
+````
 ### Response
+
 Code | Meaning
 ---------- | -------
 200| Success -- Therapy added successfully
